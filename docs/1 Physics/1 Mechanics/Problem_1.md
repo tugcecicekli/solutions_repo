@@ -7,11 +7,11 @@ Projectile motion can be broken down into horizontal and vertical components. Th
 
 1. Horizontal Motion (constant velocity):
 
-   $x(t) = v_0 \cos(\theta) \cdot t$
+   $$x(t) = v_0 \cos(\theta) \cdot t$$
 
 2. Vertical Motion (under gravitational acceleration):
    
-   $y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2$
+   $$y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2$$
 
 Where:
 - $v_0$ is the initial velocity,
@@ -25,7 +25,7 @@ $t_{\text{flight}} = \frac{2 v_0 \sin(\theta)}{g}$
 
 Using this in the horizontal motion equation, we find the range:
 
-$R = \frac{v_0^2 \sin(2\theta)}{g}$
+$$R = \frac{v_0^2 \sin(2\theta)}{g}$$
 
 This equation represents the range of the projectile as a function of the initial velocity $v_0$, gravitational acceleration $g$, and launch angle $\theta$.
 
