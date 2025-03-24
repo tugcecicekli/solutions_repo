@@ -7,11 +7,11 @@ Projectile motion can be broken down into horizontal and vertical components. Th
 
 1. Horizontal Motion (constant velocity):
 
-   $$x(t) = v_0 \cos(\theta) \cdot t$$
+   $x(t) = v_0 \cos(\theta) \cdot t$
 
 2. Vertical Motion (under gravitational acceleration):
    
-   $$y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2$$
+   $y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2$
 
 Where:
 - $v_0$ is the initial velocity,
