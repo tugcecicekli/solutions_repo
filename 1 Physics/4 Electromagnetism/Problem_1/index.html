@@ -72,6 +72,28 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#simulating-the-effects-of-the-lorentz-force">Simulating the Effects of the Lorentz Force</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#motivation">Motivation:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#1-exploration-of-applications">1. Exploration of Applications:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-simulating-particle-motion">2. Simulating Particle Motion:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-parameter-exploration">3. Parameter Exploration:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-visualization">4. Visualization:</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-code-implementation">Python Code Implementation:</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#5-discussion">5. Discussion:</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#6-suggestions-for-future-extensions">6. Suggestions for Future Extensions:</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion:</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,6 +194,102 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h3 id="simulating-the-effects-of-the-lorentz-force"><strong>Simulating the Effects of the Lorentz Force</strong></h3>
+<h4 id="motivation">Motivation:</h4>
+<p>The Lorentz force, described by the equation <strong>F = q(E + v × B)</strong>, governs the motion of charged particles in the presence of electric (E) and magnetic (B) fields. This force is fundamental in numerous areas of physics, including particle accelerators, mass spectrometers, and plasma confinement. By simulating particle motion under the influence of these fields, we can visualize the complex trajectories and gain insight into practical applications in areas such as cyclotrons and magnetic confinement systems.</p>
+<h4 id="1-exploration-of-applications">1. <strong>Exploration of Applications:</strong></h4>
+<p>The Lorentz force is central to systems where charged particles interact with electromagnetic fields. Key applications include:
+- <strong>Particle Accelerators:</strong> In cyclotrons or synchrotrons, charged particles are accelerated by electric fields and guided by magnetic fields.
+- <strong>Mass Spectrometers:</strong> Charged particles are deflected by magnetic fields, allowing scientists to measure their mass-to-charge ratio.
+- <strong>Plasma Confinement:</strong> Magnetic fields are used to confine plasma in devices like Tokamaks for nuclear fusion research.</p>
+<p>Electric fields <span class="arithmatex">\((E)\)</span> affect particles by accelerating them in the direction of the field, while magnetic fields <span class="arithmatex">\((B)\)</span> exert a force perpendicular to both the velocity of the particle and the magnetic field, causing circular or spiral motion. The combination of these fields controls the particle's motion in advanced technologies.</p>
+<h4 id="2-simulating-particle-motion">2. <strong>Simulating Particle Motion:</strong></h4>
+<p>To simulate the motion of a charged particle, we solve the Lorentz force equation using numerical methods. We will simulate the particle’s motion under different field configurations:
+- <strong>Uniform Magnetic Field:</strong> The particle moves in a circular or helical trajectory depending on the initial velocity components.
+- <strong>Combined Electric and Magnetic Fields:</strong> The electric and magnetic forces combine to produce more complex trajectories, like drift or spiral motion.
+- <strong>Crossed Electric and Magnetic Fields:</strong> A specific case where the electric and magnetic fields are perpendicular to each other, leading to interesting particle behavior.</p>
+<h4 id="3-parameter-exploration">3. <strong>Parameter Exploration:</strong></h4>
+<p>In the simulation, we will vary the following parameters:
+- <strong>Field Strengths (E, B):</strong> The intensity of the electric and magnetic fields.
+- <strong>Initial Particle Velocity (v):</strong> The starting velocity of the particle, including both magnitude and direction.
+- <strong>Charge and Mass of the Particle (q, m):</strong> The properties of the particle will influence the strength of the Lorentz force.</p>
+<p>These parameters will be varied to observe their impact on the trajectory of the particle.</p>
+<h4 id="4-visualization">4. <strong>Visualization:</strong></h4>
+<p>We will generate 2D and 3D visualizations of the particle's motion. Key phenomena to be highlighted include:
+- <strong>Larmor Radius:</strong> The radius of the circular path the particle follows in a uniform magnetic field.
+- <strong>Drift Velocity:</strong> The velocity of the particle when both electric and magnetic fields are present.</p>
+<h3 id="python-code-implementation">Python Code Implementation:</h3>
+<p>We use numerical integration (Euler or Runge-Kutta method) to solve the equation of motion for the charged particle. Below is an implementation using Python with the <strong>NumPy</strong> and <strong>Matplotlib</strong> libraries for calculations and visualizations.</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# Constants
+q = 1.6e-19  # Charge of the particle in Coulombs
+m = 9.11e-31  # Mass of the particle in kg
+E = np.array([0, 0, 0])  # Electric field (zero for this example)
+B = np.array([0, 0, 1])  # Magnetic field along the z-axis
+v_initial = np.array([1e6, 0, 0])  # Initial velocity of the particle (m/s)
+
+# Time setup
+t_max = 1e-6  # Maximum time
+dt = 1e-9  # Time step
+steps = int(t_max / dt)  # Number of steps
+
+# Arrays to store position and velocity
+positions = np.zeros((steps, 3))
+velocities = np.zeros((steps, 3))
+
+# Initial conditions
+positions[0] = np.array([0, 0, 0])
+velocities[0] = v_initial
+
+# Simulation loop
+for i in range(1, steps):
+    # Lorentz force F = q(E + v x B)
+    v = velocities[i-1]
+    F = q * (E + np.cross(v, B))
+
+    # Update velocity and position using Euler's method
+    velocities[i] = v + F * dt / m
+    positions[i] = positions[i-1] + velocities[i] * dt
+
+# Plot the results in 3D
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot(positions[:, 0], positions[:, 1], positions[:, 2])
+
+# Label axes and show the plot
+ax.set_xlabel('X position (m)')
+ax.set_ylabel('Y position (m)')
+ax.set_zlabel('Z position (m)')
+ax.set_title('Particle Trajectory under Lorentz Force')
+
+plt.show()
+</code></pre>
+<p>https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-</p>
+<h3 id="5-discussion">5. <strong>Discussion:</strong></h3>
+<p>This simulation provides a clear visualization of how a charged particle behaves under different field configurations. The motion can be circular, helical, or drift depending on the presence of the electric and magnetic fields.</p>
+<ul>
+<li>
+<p><strong>In a uniform magnetic field</strong>, the particle traces a circular path with a radius determined by the <strong>Larmor radius</strong>, which is given by the equation:
+  <span class="arithmatex">\(<span class="arithmatex">\(r_L = \frac{mv_{\perp}}{qB}\)</span>\)</span>
+  where <span class="arithmatex">\(v_{\perp}\)</span> is the component of the velocity perpendicular to the magnetic field.</p>
+</li>
+<li>
+<p><strong>In combined fields</strong>, the particle may exhibit complex motion such as drift velocity, where the electric field exerts a force in the direction of the field, while the magnetic field causes perpendicular motion.</p>
+</li>
+</ul>
+<p>This simulation mimics the behavior observed in real-world devices like <strong>cyclotrons</strong> and <strong>mass spectrometers</strong>, where charged particles are manipulated by magnetic fields for acceleration and detection.</p>
+<h3 id="6-suggestions-for-future-extensions">6. <strong>Suggestions for Future Extensions:</strong></h3>
+<ul>
+<li><strong>Non-Uniform Fields:</strong> Extend the simulation to include non-uniform electric and magnetic fields (e.g., magnetic gradients in a magnetic trap).</li>
+<li><strong>Relativistic Effects:</strong> For very high velocities, include relativistic corrections to the particle’s mass and velocity.</li>
+<li><strong>Particle Collisions:</strong> Add more complexity by simulating interactions between multiple particles.</li>
+</ul>
+<hr/>
+<h3 id="conclusion">Conclusion:</h3>
+<p>Simulating the Lorentz force provides valuable insights into the motion of charged particles in electromagnetic fields, essential for understanding the behavior of systems like particle accelerators and mass spectrometers. The results from this simulation offer a practical and visual understanding of how particles are controlled in these systems, with further potential to extend this model to more complex scenarios.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
