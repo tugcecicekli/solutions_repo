@@ -75,6 +75,8 @@ plt.show()
 ### Source
 [Colab](https://colab.research.google.com/drive/1Gzs6NYgJDfira_n9CpCjV6JsMjYsQ-4I)
 
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-3.png?raw=true)
+
 ---
 
 ## **4. Results and Discussion**  
