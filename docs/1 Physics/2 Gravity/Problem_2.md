@@ -81,7 +81,7 @@ plt.legend()
 plt.grid()
 plt.show()
 ```
-[Colab] (https://colab.research.google.com/drive/1ZKQKWnH0bVhEBpNgUawo7nmMMx6MW80Y)
+[Colab](https://colab.research.google.com/drive/1ZKQKWnH0bVhEBpNgUawo7nmMMx6MW80Y)
 
 ---
 
