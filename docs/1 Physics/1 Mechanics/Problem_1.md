@@ -25,7 +25,7 @@ $t_{\text{flight}} = \frac{2 v_0 \sin(\theta)}{g}$
 
 Using this in the horizontal motion equation, we find the range:
 
-$$R = \frac{v_0^2 \sin(2\theta)}{g}$$
+$R = \frac{v_0^2 \sin(2\theta)}{g}$
 
 This equation represents the range of the projectile as a function of the initial velocity $v_0$, gravitational acceleration $g$, and launch angle $\theta$.
 
@@ -81,8 +81,10 @@ The idealized model assumes no air resistance. However, in reality, air resistan
 Understanding projectile motion is crucial in sports like soccer, football, and basketball. Engineers also use projectile motion principles in launching projectiles and rockets.
 
 # 4. Implementation 
-## Source
+
 [Colab](https://colab.research.google.com/drive/1ituJ1v7ZvE1DFsCsE_xxTT5jaNQ_-kp1)
+
+ ![](2025-03-26-15-45-15.png)
 
 # 5. Limitations of the Idealized Model
 
