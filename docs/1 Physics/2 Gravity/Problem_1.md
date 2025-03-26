@@ -73,7 +73,7 @@ plt.grid()
 plt.show()
 ```
 ### Source
-[Colab] (https://colab.research.google.com/drive/1Gzs6NYgJDfira_n9CpCjV6JsMjYsQ-4I)
+[Colab](https://colab.research.google.com/drive/1Gzs6NYgJDfira_n9CpCjV6JsMjYsQ-4I)
 
 ---
 
