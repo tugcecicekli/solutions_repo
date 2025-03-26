@@ -83,7 +83,7 @@ ax.set_title('Particle Trajectory under Lorentz Force')
 
 plt.show()
 ```
-https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-
+[Colab](https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-)
 
 ### 5. **Discussion:**
 This simulation provides a clear visualization of how a charged particle behaves under different field configurations. The motion can be circular, helical, or drift depending on the presence of the electric and magnetic fields.
