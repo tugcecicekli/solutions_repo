@@ -83,6 +83,8 @@ plt.show()
 ```
 [Colab](https://colab.research.google.com/drive/1ZKQKWnH0bVhEBpNgUawo7nmMMx6MW80Y)
 
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-4.png?raw=true)
+
 ---
 
 ## **4. Results and Discussion**
