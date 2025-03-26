@@ -82,7 +82,7 @@ Understanding projectile motion is crucial in sports like soccer, football, and 
 
 # 4. Implementation 
 ## Source
-[Colab] (https://colab.research.google.com/drive/1ituJ1v7ZvE1DFsCsE_xxTT5jaNQ_-kp1)
+[Colab](https://colab.research.google.com/drive/1ituJ1v7ZvE1DFsCsE_xxTT5jaNQ_-kp1)
 
 # 5. Limitations of the Idealized Model
 
