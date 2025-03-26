@@ -85,6 +85,8 @@ plt.show()
 ```
 [Colab](https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-)
 
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/4%20Electromagnetism/Unknown-7.png?raw=true)
+
 ### 5. **Discussion:**
 This simulation provides a clear visualization of how a charged particle behaves under different field configurations. The motion can be circular, helical, or drift depending on the presence of the electric and magnetic fields.
 
