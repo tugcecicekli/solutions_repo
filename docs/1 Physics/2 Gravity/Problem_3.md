@@ -91,7 +91,7 @@ plt.grid()
 plt.axis('equal')
 plt.show()
 ```
-[Colab] (https://colab.research.google.com/drive/1tmNx00N0d6ZO2M9a7sIeov0q_ArNJI7H)
+[Colab](https://colab.research.google.com/drive/1tmNx00N0d6ZO2M9a7sIeov0q_ArNJI7H)
 
 ---
 
