@@ -55,6 +55,8 @@ plt.show()
 #### **Source**
 [Colab](https://colab.research.google.com/drive/1mZ4tKUUQdA2M2ejXxRenjbDZ4mv9cX8s)
 
+![Example Image](https://raw.githubusercontent.com/tugcecicekli/solutions_repo/refs/heads/main/docs/1%20Physics/1%20Mechanics/Unknown-2.png)
+
 #### **4. Results and Discussion**  
 - **Periodic motion** occurs for weak forcing.  
 - **Resonance** amplifies oscillations when $\omega \approx \omega_0$.  
