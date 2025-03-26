@@ -84,7 +84,7 @@ Understanding projectile motion is crucial in sports like soccer, football, and 
 
 [Colab](https://colab.research.google.com/drive/1ituJ1v7ZvE1DFsCsE_xxTT5jaNQ_-kp1)
 
-https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown.png?raw=true
+[alt text](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown.png?raw=true)
 
 # 5. Limitations of the Idealized Model
 
