@@ -86,6 +86,8 @@ plt.show()
 ```
 [Colab](https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-)
 
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/3%20Waves/Unknown-6.png?raw=true)
+
 ---
 
 ## **4. Results and Discussion**  
