@@ -84,7 +84,7 @@ plt.ylabel("y")
 plt.legend()
 plt.show()
 ```
-https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-
+[Colab](https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-)
 
 ---
 
