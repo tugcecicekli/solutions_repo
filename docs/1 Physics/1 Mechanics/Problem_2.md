@@ -53,7 +53,7 @@ plt.grid()
 plt.show()
 ```
 #### **Source**
-[Colab] (https://colab.research.google.com/drive/1mZ4tKUUQdA2M2ejXxRenjbDZ4mv9cX8s)
+[Colab](https://colab.research.google.com/drive/1mZ4tKUUQdA2M2ejXxRenjbDZ4mv9cX8s)
 
 #### **4. Results and Discussion**  
 - **Periodic motion** occurs for weak forcing.  
