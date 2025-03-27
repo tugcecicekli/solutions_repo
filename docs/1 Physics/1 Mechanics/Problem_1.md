@@ -81,6 +81,32 @@ The idealized model assumes no air resistance. However, in reality, air resistan
 Understanding projectile motion is crucial in sports like soccer, football, and basketball. Engineers also use projectile motion principles in launching projectiles and rockets.
 
 # 4. Implementation 
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def projectile_range(v0, angle_deg):
+    g = 9.81  # Gravitational acceleration in m/s^2
+    angle_rad = np.radians(angle_deg)  # Convert angle to radians
+    R = (v0**2 * np.sin(2 * angle_rad)) / g
+    return R
+
+# Initial parameters
+v0 = 50  # Initial velocity in m/s
+angles = np.linspace(0, 90, 100)  # Launch angles from 0 to 90 degrees
+
+# Calculate the range for each angle
+ranges = [projectile_range(v0, angle) for angle in angles]
+
+# Plotting the results
+plt.figure(figsize=(10, 6))
+plt.plot(angles, ranges)
+plt.title('Range vs Launch Angle')
+plt.xlabel('Launch Angle (degrees)')
+plt.ylabel('Range (meters)')
+plt.grid(True)
+plt.show()
+```
 
 [Colab](https://colab.research.google.com/drive/1ituJ1v7ZvE1DFsCsE_xxTT5jaNQ_-kp1)
 
