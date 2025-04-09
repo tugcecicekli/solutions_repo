@@ -67,6 +67,9 @@ plt.grid(True)
 plt.legend()
 plt.show()
 ```
+
+### Output:
+
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown.png?raw=true)
 
 
