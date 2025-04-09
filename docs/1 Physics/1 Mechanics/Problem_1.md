@@ -75,7 +75,6 @@ plt.show()
 
 Visit: [Colab](https://colab.research.google.com/drive/1IbveeROGuSfvVgSacjFp2BdC1BfIn6ZK)
 
-### Output:
 
 ---
 
