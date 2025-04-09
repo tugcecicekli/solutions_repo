@@ -158,7 +158,7 @@ Curves rising in height as initial velocity increases, but always peaking at 45Â
 
 ---
 
-## ==> 3. Practical Applications
+## 3. Practical Applications
 
 - **Sports**: Optimize kicking or throwing angles.
 - **Engineering**: Design water fountains, civil projectiles, or robotic arm paths.
@@ -167,7 +167,7 @@ Curves rising in height as initial velocity increases, but always peaking at 45Â
 
 ---
 
-## ==> 4. Extensions and Real-World Models
+## 4. Extensions and Real-World Models
 
 ### Air Resistance
 Introducing drag results in non-linear differential equations. For example:
