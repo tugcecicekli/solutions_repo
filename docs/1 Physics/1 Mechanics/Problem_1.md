@@ -68,6 +68,7 @@ plt.legend()
 plt.show()
 ```
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown.png?raw=true)
+
 Visit: [Colab](https://colab.research.google.com/drive/1IbveeROGuSfvVgSacjFp2BdC1BfIn6ZK)
 
 ### Output:
@@ -96,7 +97,9 @@ plt.grid(True)
 plt.legend()
 plt.show()
 ```
+
 Visit: [Colab](https://colab.research.google.com/drive/1IbveeROGuSfvVgSacjFp2BdC1BfIn6ZK)
+
 ### Output:
 Multiple arcs, illustrating how angle affects height and range. Lower angles are flatter; higher angles reach greater heights but fall short in range.
 
