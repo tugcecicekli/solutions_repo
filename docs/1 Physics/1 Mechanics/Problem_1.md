@@ -140,6 +140,8 @@ def animate(i):
 ani = animation.FuncAnimation(fig, animate, frames=len(t_vals), init_func=init, interval=20, blit=True)
 plt.show()
 ```
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown-3.png?raw=true)
+
 Visit:[Colab](https://colab.research.google.com/drive/1IbveeROGuSfvVgSacjFp2BdC1BfIn6ZK#scrollTo=lAgwoWZfKqAD)
 ---
 
