@@ -150,7 +150,7 @@ plt.grid(True)
 plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1J1BiWvt02427kZD9_FCtcQln2kks8YP0)
-
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown-7.png?raw=true)
 ---
 
 ## 5. Animation of the Forced Damped Pendulum
