@@ -123,8 +123,71 @@ plt.show()
 Visit: [Colab](https://colab.research.google.com/drive/1mNZ4qqAkfLGtsvfvqSBXUXPuzzm0EqMt#scrollTo=BRT2yI8kOk18)
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown-8.png?raw=true)
 ---
+## 4. Visualizing the Forced Pendulum
+```
+import numpy as np
+import matplotlib.pyplot as plt
 
-## 4. Visualizing the Forced Damped Pendulum
+# Parameters
+g = 9.81
+L = 1.0
+omega0 = np.sqrt(g / L)
+theta0 = 0.2
+omega_init = 0.0
+b = 0.0         # No damping
+A = 1.2         # Forcing amplitude
+omega_d = 2/3   # Driving frequency
+dt = 0.01
+t_max = 40
+t = np.arange(0, t_max, dt)
+
+# RK4 integration for the forced pendulum
+def rk4_step(theta, omega, t, dt):
+    def f(t, y):
+        theta, omega = y
+        dtheta = omega
+        domega = -omega0**2 * np.sin(theta) + A * np.cos(omega_d * t)
+        return np.array([dtheta, domega])
+    
+    y = np.array([theta, omega])
+    k1 = f(t, y)
+    k2 = f(t + dt/2, y + dt*k1/2)
+    k3 = f(t + dt/2, y + dt*k2/2)
+    k4 = f(t + dt, y + dt*k3)
+    return y + dt * (k1 + 2*k2 + 2*k3 + k4)/6
+
+# Simulation
+theta = np.zeros_like(t)
+omega = np.zeros_like(t)
+theta[0] = theta0
+omega[0] = omega_init
+
+for i in range(1, len(t)):
+    theta[i], omega[i] = rk4_step(theta[i-1], omega[i-1], t[i-1], dt)
+
+# Plotting
+fig, axs = plt.subplots(1, 2, figsize=(12, 4))
+
+# Time Series
+axs[0].plot(t, theta, color='darkorange')
+axs[0].set_title("Forced Pendulum (No Damping) - Time Series")
+axs[0].set_xlabel("Time (s)")
+axs[0].set_ylabel("Angle θ (rad)")
+axs[0].grid(True)
+
+# Phase Portrait
+axs[1].plot(theta, omega, color='orangered')
+axs[1].set_title("Forced Pendulum (No Damping) - Phase Portrait")
+axs[1].set_xlabel("θ (rad)")
+axs[1].set_ylabel("ω (rad/s)")
+axs[1].grid(True)
+
+plt.tight_layout()
+plt.show()
+```
+Visit: [Colab](https://colab.research.google.com/drive/1mNZ4qqAkfLGtsvfvqSBXUXPuzzm0EqMt#scrollTo=X-2nJcXnjtpP)
+---
+## 5. Visualizing the Forced Damped Pendulum
 
 ```python
 # Forced Damped Pendulum Simulation
@@ -170,7 +233,7 @@ Visit: [Colab](https://colab.research.google.com/drive/1J1BiWvt02427kZD9_FCtcQln
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown-7.png?raw=true)
 ---
 
-## 5. Animation of the Forced Damped Pendulum
+## 6. Animation of the Forced Damped Pendulum
 
 ```python
 import matplotlib.animation as animation
@@ -292,7 +355,7 @@ plt.show()
 Visit: [Colab](https://colab.research.google.com/drive/1J1BiWvt02427kZD9_FCtcQln2kks8YP0#scrollTo=DyuOwt_mgOai)
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown-6.png?raw=true)
 
-## 6. Extensions and Advanced Explorations
+## 7. Extensions and Advanced Explorations
 
 - **Phase Portraits & Poincaré Sections**: Reveal geometry of motion and transitions to chaos.
 - **Bifurcation Diagrams**: Vary forcing amplitude $A$ or frequency $\omega$ and plot long-term values.
@@ -303,7 +366,7 @@ Visit: [Colab](https://colab.research.google.com/drive/1J1BiWvt02427kZD9_FCtcQln
 
 ---
 
-## 7. Conclusion
+## 8. Conclusion
 
 This project comprehensively examined pendulum dynamics in three stages:
 
