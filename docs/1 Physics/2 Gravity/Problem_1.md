@@ -21,6 +21,7 @@ This law connects the period of revolution $T$ of a planet (or satellite) with t
 
 ### Step 1: Gravitational Force
 Newton’s Law of Gravitation
+
 $$F_g = \frac{G M m}{r^2}$$
 
 ### Step 2: Centripetal Force for Circular Orbits
