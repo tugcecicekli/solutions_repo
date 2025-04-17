@@ -35,9 +35,11 @@ $$T = \frac{2\pi r}{v}
 \Rightarrow T^2 = \frac{4\pi^2 r^2}{v^2}$$
 
 Substitute $v^2$:
+
 $$T^2 = \frac{4\pi^2 r^2}{\frac{G M}{r}} = \frac{4\pi^2 r^3}{G M}$$
 
 Final Form:
+
 $$T^2 = \left( \frac{4\pi^2}{G M} \right) r^3
 \Rightarrow T^2 \propto r^3$$
 
