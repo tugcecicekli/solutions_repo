@@ -104,6 +104,7 @@ plt.grid(True)
 plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1mNZ4qqAkfLGtsvfvqSBXUXPuzzm0EqMt#scrollTo=BRT2yI8kOk18)
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown-6.png?raw=true)
 ---
 
 ## 4. Visualizing the Forced Damped Pendulum
