@@ -175,7 +175,28 @@
 <h1 id="orbital-period-and-orbital-radius">Orbital Period and Orbital Radius</h1>
 <hr/>
 <h2 id="motivation">Motivation</h2>
-<p>The elegant relationship between the <strong>square of the orbital period (T)</strong> and the <strong>cube of the orbital radius (r)</strong> for circular orbits, known as <strong>Kepler’s Third Law</strong>, reveals deep insights into gravitational interactions. This project aims to derive this law starting from Newtonian mechanics and differential equations, explore its real-world implications, and validate it through simulations and animations.</p>
+<h2 id="the-elegant-relationship-between-the-square-of-the-orbital-period-t-and-the-cube-of-the-orbital-radius-r-for-circular-orbits-known-as-keplers-third-law-reveals-deep-insights-into-gravitational-interactions-this-project-aims-to-derive-this-law-starting-from-newtonian-mechanics-and-differential-equations-explore-its-real-world-implications-and-validate-it-through-simulations-and-animations">The elegant relationship between the <strong>square of the orbital period (T)</strong> and the <strong>cube of the orbital radius (r)</strong> for circular orbits, known as <strong>Kepler’s Third Law</strong>, reveals deep insights into gravitational interactions. This project aims to derive this law starting from Newtonian mechanics and differential equations, explore its real-world implications, and validate it through simulations and animations.</h2>
+<p>Kepler’s Third Law reveals a fundamental relationship in orbital mechanics:</p>
+<div class="arithmatex">\[T^2 \propto r^3\]</div>
+<p>This law connects the period of revolution <span class="arithmatex">\(T\)</span> of a planet (or satellite) with the radius <span class="arithmatex">\(r\)</span> of its circular orbit. It's a powerful tool used in celestial mechanics, satellite design, and calculating masses of celestial bodies.</p>
+<hr/>
+<h2 id="theoretical-derivation-using-newtonian-mechanics">Theoretical Derivation using Newtonian Mechanics</h2>
+<h3 id="step-1-gravitational-force">Step 1: Gravitational Force</h3>
+<p>Newton’s Law of Gravitation:
+<span class="arithmatex">\(<span class="arithmatex">\(F_g = \frac{G M m}{r^2}\)</span>\)</span></p>
+<h3 id="step-2-centripetal-force-for-circular-orbits">Step 2: Centripetal Force for Circular Orbits</h3>
+<div class="arithmatex">\[F_c = \frac{m v^2}{r}\]</div>
+<h3 id="step-3-equating-forces">Step 3: Equating Forces</h3>
+<div class="arithmatex">\[\frac{G M m}{r^2} = \frac{m v^2}{r}
+\Rightarrow v^2 = \frac{G M}{r}\]</div>
+<h3 id="step-4-express-orbital-period">Step 4: Express Orbital Period</h3>
+<div class="arithmatex">\[T = \frac{2\pi r}{v}
+\Rightarrow T^2 = \frac{4\pi^2 r^2}{v^2}\]</div>
+<p>Substitute <span class="arithmatex">\(v^2\)</span>:
+<span class="arithmatex">\(<span class="arithmatex">\(T^2 = \frac{4\pi^2 r^2}{\frac{G M}{r}} = \frac{4\pi^2 r^3}{G M}\)</span>\)</span></p>
+<p>Final Form:
+<span class="arithmatex">\(<span class="arithmatex">\(T^2 = \left( \frac{4\pi^2}{G M} \right) r^3
+\Rightarrow T^2 \propto r^3\)</span>\)</span></p>
 <hr/>
 <h2 id="theoretical-analysis-via-differential-equations">Theoretical Analysis via Differential Equations</h2>
 <h3 id="newtons-law-of-universal-gravitation">Newton’s Law of Universal Gravitation</h3>
