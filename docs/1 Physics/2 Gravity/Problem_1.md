@@ -157,7 +157,7 @@ plt.grid(True)
 plt.legend()
 plt.show()
 ```
-Visit: [Colab]((https://colab.research.google.com/drive/1Gzs6NYgJDfira_n9CpCjV6JsMjYsQ-4I#scrollTo=pRkikqHFYLIU))
+Visit:[Colab]((https://colab.research.google.com/drive/1Gzs6NYgJDfira_n9CpCjV6JsMjYsQ-4I#scrollTo=pRkikqHFYLIU))
 
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-2.png?raw=true)
 
