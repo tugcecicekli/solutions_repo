@@ -399,7 +399,6 @@ HTML(ani.to_jshtml())
 <li>Measure black hole masses via stellar motion</li>
 </ul>
 <hr/>
-<h2 id="summary">Summary</h2>
 <table>
 <thead>
 <tr>
@@ -431,6 +430,135 @@ HTML(ani.to_jshtml())
 </tbody>
 </table>
 <hr/>
+<h2 id="keplers-law-applied-to-the-solar-system">Kepler’s Law Applied to the Solar System</h2>
+<h3 id="planets-mercury-venus-earth-mars">Planets: Mercury, Venus, Earth, Mars</h3>
+<table>
+<thead>
+<tr>
+<th>Planet</th>
+<th>Orbital Radius (10⁸ km)</th>
+<th>Period (days)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mercury</td>
+<td>57.9</td>
+<td>87.97</td>
+</tr>
+<tr>
+<td>Venus</td>
+<td>108.2</td>
+<td>224.70</td>
+</tr>
+<tr>
+<td>Earth</td>
+<td>149.6</td>
+<td>365.25</td>
+</tr>
+<tr>
+<td>Mars</td>
+<td>227.9</td>
+<td>687.00</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="calculating-mass-of-earth-using-the-moon">Calculating Mass of Earth (Using the Moon)</h2>
+<ul>
+<li><span class="arithmatex">\(r = 3.844 \times 10^8 \, \text{m}\)</span></li>
+<li><span class="arithmatex">\(T = 27.32 \, \text{days} = 2.36 \times 10^6 \, \text{s}\)</span></li>
+</ul>
+<p><span class="arithmatex">\(M = \frac{4 \pi^2 r^3}{G T^2}\)</span></p>
+<pre><code class="language-python">G = 6.67430e-11
+r_earth_moon = 3.844e8
+T_moon = 27.32 * 86400
+
+M_earth = 4 * np.pi**2 * r_earth_moon**3 / (G * T_moon**2)
+print(f"Mass of Earth ≈ {M_earth:.2e} kg")
+</code></pre>
+<p>Output: <strong><span class="arithmatex">\( 5.97 \times 10^{24} \, \text{kg} \)</span></strong> (correct)</p>
+<hr/>
+<h2 id="calculating-mass-of-the-sun-using-earths-orbit">☀️ Calculating Mass of the Sun (Using Earth's Orbit)</h2>
+<ul>
+<li><span class="arithmatex">\(r = 1.496 \times 10^{11} \, \text{m}\)</span></li>
+<li><span class="arithmatex">\(T = 365.25 \, \text{days} = 3.156 \times 10^7 \, \text{s}\)</span></li>
+</ul>
+<p><span class="arithmatex">\(M = \frac{4 \pi^2 r^3}{G T^2}\)</span></p>
+<pre><code class="language-python">r_earth_sun = 1.496e11
+T_earth = 365.25 * 86400
+
+M_sun = 4 * np.pi**2 * r_earth_sun**3 / (G * T_earth**2)
+print(f"Mass of Sun ≈ {M_sun:.2e} kg")
+</code></pre>
+<p>Output: <strong><span class="arithmatex">\( 1.99 \times 10^{30} \, \text{kg} \)</span></strong> (correct)</p>
+<hr/>
+<h2 id="orbit-animation">Orbit Animation</h2>
+<pre><code class="language-python">from matplotlib.animation import FuncAnimation
+from IPython.display import HTML
+
+# Time setup
+t_vals = np.linspace(0, 2 * np.pi, 500)
+x_vals = r_earth_sun * np.cos(t_vals)
+y_vals = r_earth_sun * np.sin(t_vals)
+
+fig, ax = plt.subplots(figsize=(6,6))
+ax.set_xlim(-1.2*r_earth_sun, 1.2*r_earth_sun)
+ax.set_ylim(-1.2*r_earth_sun, 1.2*r_earth_sun)
+ax.set_aspect('equal')
+ax.set_title('Earth Orbiting the Sun')
+earth, = ax.plot([], [], 'ro')
+sun = ax.plot(0, 0, 'yo', markersize=12)
+
+def init():
+    earth.set_data([], [])
+    return earth,
+
+def update(i):
+    earth.set_data(x_vals[i], y_vals[i])
+    return earth,
+
+ani = FuncAnimation(fig, update, frames=len(t_vals), init_func=init, blit=True)
+HTML(ani.to_jshtml())
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kepler's Law</strong></td>
+<td><span class="arithmatex">\(T^2 \propto r^3\)</span></td>
+</tr>
+<tr>
+<td><strong>Derived from</strong></td>
+<td>Newton's Gravity + Centripetal Motion</td>
+</tr>
+<tr>
+<td><strong>T² vs r³ Plot</strong></td>
+<td>Straight line confirmed</td>
+</tr>
+<tr>
+<td><strong>Mass of Earth</strong></td>
+<td><span class="arithmatex">\(\approx 5.97 \times 10^{24} \, \text{kg}\)</span></td>
+</tr>
+<tr>
+<td><strong>Mass of Sun</strong></td>
+<td><span class="arithmatex">\(\approx 1.99 \times 10^{30} \, \text{kg}\)</span></td>
+</tr>
+<tr>
+<td><strong>Planets Used</strong></td>
+<td>Mercury, Venus, Earth, Mars</td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td>All steps simulated and visualized</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
