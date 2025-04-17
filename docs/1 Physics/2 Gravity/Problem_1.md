@@ -6,6 +6,7 @@
 ## Motivation
 
 The elegant relationship between the **square of the orbital period (T)** and the **cube of the orbital radius (r)** for circular orbits, known as **Kepler’s Third Law**, reveals deep insights into gravitational interactions. This project aims to derive this law starting from Newtonian mechanics and differential equations, explore its real-world implications, and validate it through simulations and animations.
+
 ---
 
 Kepler’s Third Law reveals a fundamental relationship in orbital mechanics:
