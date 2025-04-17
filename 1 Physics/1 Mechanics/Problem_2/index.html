@@ -50,24 +50,6 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#investigating-the-dynamics-of-a-forced-damped-pendulum-summary">Investigating the Dynamics of a Forced Damped Pendulum (Summary)</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#1-introduction">1. Introduction</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#2-theoretical-background">2. Theoretical Background</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#3-numerical-simulation">3. Numerical Simulation</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#source">Source</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#4-results-and-discussion">4. Results and Discussion</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#5-practical-applications">5. Practical Applications</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#6-conclusion">6. Conclusion</a>
-</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -190,71 +172,192 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
-<h3 id="investigating-the-dynamics-of-a-forced-damped-pendulum-summary"><strong>Investigating the Dynamics of a Forced Damped Pendulum</strong> (Summary)</h3>
-<h4 id="1-introduction"><strong>1. Introduction</strong></h4>
-<p>The forced damped pendulum is a nonlinear system exhibiting behaviors like <strong>resonance, periodic motion, and chaos</strong> due to damping and external forcing. Understanding its dynamics is crucial for applications in <strong>engineering, energy harvesting, and structural stability</strong>.  </p>
-<h4 id="2-theoretical-background"><strong>2. Theoretical Background</strong></h4>
-<p>The equation of motion:<br/>
-<span class="arithmatex">\(\ddot{\theta} + b\dot{\theta} + \omega_0^2 \sin\theta = A \cos(\omega t)\)</span>
-- <strong>Damping <span class="arithmatex">\((b)\)</span></strong> controls energy loss.<br/>
-- <strong>Forcing <span class="arithmatex">\((A, \omega)\)</span></strong> introduces external periodic energy, leading to resonance or chaotic motion.<br/>
-- For <strong>small angles <span class="arithmatex">\((\sin\theta \approx \theta)\)</span></strong>, the system behaves like a linear <strong>driven harmonic oscillator</strong>.  </p>
-<h4 id="3-numerical-simulation"><strong>3. Numerical Simulation</strong></h4>
-<p>Since the equation is nonlinear, we use the <strong>Runge-Kutta method</strong> to solve it numerically.  </p>
+<h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum">Investigating the Dynamics of a Forced Damped Pendulum</h1>
+<hr/>
+<h2 id="motivation">Motivation</h2>
+<p>The pendulum is more than a classic classroom example — it's a portal into the world of nonlinear physics. From the elegance of simple harmonic motion to the unpredictability of chaos, the pendulum reveals how small changes in conditions lead to vastly different outcomes. In this project, we:</p>
+<ul>
+<li>Explore <strong>three types</strong> of pendulums:</li>
+<li>Simple (undamped, unforced)</li>
+<li>Damped (no forcing)</li>
+<li>Forced Damped (full system)</li>
+<li>Analyze them <strong>theoretically and computationally</strong></li>
+<li>Visualize them through <strong>graphs and animations</strong></li>
+<li>Extend our study into <strong>chaotic behavior and bifurcations</strong></li>
+</ul>
+<hr/>
+<h2 id="1-differential-equations">1. Differential Equations</h2>
+<h3 id="a-simple-pendulum">A. Simple Pendulum</h3>
+<div class="arithmatex">\[\frac{d^2\theta}{dt^2} + \omega_0^2 \sin(\theta) = 0, \quad \omega_0 = \sqrt{\frac{g}{L}}\]</div>
+<p><strong>Small-angle approximation</strong>:</p>
+<div class="arithmatex">\[\frac{d^2\theta}{dt^2} + \omega_0^2 \theta = 0\]</div>
+<hr/>
+<h3 id="b-damped-pendulum">B. Damped Pendulum</h3>
+<div class="arithmatex">\[\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \omega_0^2 \sin(\theta) = 0\]</div>
+<hr/>
+<h3 id="c-forced-damped-pendulum">C. Forced Damped Pendulum</h3>
+<div class="arithmatex">\[\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \omega_0^2 \sin(\theta) = A \cos(\omega t)\]</div>
+<p>Where:
+- <span class="arithmatex">\(\theta\)</span>: angular displacement<br/>
+- <span class="arithmatex">\(b\)</span>: damping coefficient<br/>
+- <span class="arithmatex">\(A\)</span>: amplitude of driving force<br/>
+- <span class="arithmatex">\(\omega\)</span>: driving frequency  </p>
+<hr/>
+<h2 id="2-python-simulation-and-visualization">2. Python Simulation and Visualization</h2>
+<h3 id="imports-and-parameters">Imports and Parameters</h3>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
+</code></pre>
+<pre><code class="language-python"># Constants
+g = 9.81
+L = 1.0
+omega0 = np.sqrt(g / L)
+theta0 = 0.2
+omega_init = 0.0
+dt = 0.01
+t_max = 20
+t = np.arange(0, t_max, dt)
+</code></pre>
+<hr/>
+<h3 id="runge-kutta-solver">Runge-Kutta Solver</h3>
+<pre><code class="language-python">def rk4_step(theta, omega, t, dt, b=0, A=0, omega_d=0, use_sin=True):
+    def f(t, y):
+        theta, omega = y
+        dtheta = omega
+        if use_sin:
+            domega = -b * omega - omega0**2 * np.sin(theta) + A * np.cos(omega_d * t)
+        else:
+            domega = -b * omega - omega0**2 * theta + A * np.cos(omega_d * t)
+        return np.array([dtheta, domega])
 
-# Define system parameters
-b = 0.2   # Damping coefficient
-A = 1.5   # Driving force amplitude
-omega = 2.0  # Driving frequency
-g = 9.81  # Gravity
-L = 1.0   # Pendulum length
-omega_0 = np.sqrt(g / L)
+    y = np.array([theta, omega])
+    k1 = f(t, y)
+    k2 = f(t + dt/2, y + dt*k1/2)
+    k3 = f(t + dt/2, y + dt*k2/2)
+    k4 = f(t + dt, y + dt*k3)
+    return y + dt * (k1 + 2*k2 + 2*k3 + k4)/6
 
-# Differential equation for the forced damped pendulum
-def pendulum_eq(t, y):
-    theta, omega_dot = y
-    d_theta = omega_dot
-    d_omega = -b * omega_dot - omega_0**2 * np.sin(theta) + A * np.cos(omega * t)
-    return [d_theta, d_omega]
+def simulate(b=0, A=0, omega_d=0, use_sin=True):
+    theta = np.zeros_like(t)
+    omega = np.zeros_like(t)
+    theta[0], omega[0] = theta0, omega_init
+    for i in range(1, len(t)):
+        theta[i], omega[i] = rk4_step(theta[i-1], omega[i-1], t[i-1], dt, b, A, omega_d, use_sin)
+    return theta, omega
+</code></pre>
+<hr/>
+<h3 id="simulate-and-plot-all-three-systems">Simulate and Plot All Three Systems</h3>
+<pre><code class="language-python">theta_simple, _ = simulate(b=0, A=0, use_sin=False)
+theta_damped, _ = simulate(b=0.2, A=0, use_sin=False)
+theta_forced, _ = simulate(b=0.5, A=1.2, omega_d=2/3)
 
-# Time range and initial conditions
-t_span = (0, 50)
-t_eval = np.linspace(*t_span, 1000)
-y0 = [0.5, 0]  # Initial angle and angular velocity
-
-# Solve the equation
-solution = solve_ivp(pendulum_eq, t_span, y0, t_eval=t_eval, method='RK45')
-
-# Plot results
-plt.figure(figsize=(10, 5))
-plt.plot(solution.t, solution.y[0], label=r'$\theta(t)$')
-plt.xlabel('Time (s)')
-plt.ylabel('Angle (rad)')
-plt.title('Forced Damped Pendulum Motion')
+plt.figure(figsize=(12, 6))
+plt.plot(t, theta_simple, label='Simple Pendulum')
+plt.plot(t, theta_damped, label='Damped Pendulum')
+plt.plot(t, theta_forced, label='Forced Damped Pendulum')
+plt.title("Pendulum Motion Comparison")
+plt.xlabel("Time (s)")
+plt.ylabel("Angle (rad)")
 plt.legend()
-plt.grid()
+plt.grid(True)
 plt.show()
 </code></pre>
-<h4 id="source"><strong>Source</strong></h4>
-<p><a href="https://colab.research.google.com/drive/1mZ4tKUUQdA2M2ejXxRenjbDZ4mv9cX8s">Colab</a></p>
-<p><img alt="Example Image" src="https://raw.githubusercontent.com/tugcecicekli/solutions_repo/refs/heads/main/docs/1%20Physics/1%20Mechanics/Unknown-2.png"/></p>
-<h4 id="4-results-and-discussion"><strong>4. Results and Discussion</strong></h4>
+<hr/>
+<h2 id="3-pendulum-animation-colab-ready">3. Pendulum Animation (Colab-Ready)</h2>
+<h3 id="animation-code-for-forced-damped-pendulum">Animation Code for Forced Damped Pendulum</h3>
+<pre><code class="language-python">import matplotlib.animation as animation
+from IPython.display import HTML
+
+theta_anim, _ = simulate(b=0.5, A=1.2, omega_d=2/3)
+x_vals = L * np.sin(theta_anim)
+y_vals = -L * np.cos(theta_anim)
+
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.set_xlim(-1.2, 1.2)
+ax.set_ylim(-1.2, 1.2)
+ax.set_aspect('equal')
+ax.grid()
+line, = ax.plot([], [], 'o-', lw=2)
+trail, = ax.plot([], [], '-', lw=0.5)
+xdata, ydata = [], []
+
+def init():
+    line.set_data([], [])
+    trail.set_data([], [])
+    return line, trail
+
+def animate(i):
+    x, y = x_vals[i], y_vals[i]
+    xdata.append(x)
+    ydata.append(y)
+    if len(xdata) &gt; 100:
+        xdata.pop(0)
+        ydata.pop(0)
+    line.set_data([0, x], [0, y])
+    trail.set_data(xdata, ydata)
+    return line, trail
+
+ani = animation.FuncAnimation(fig, animate, frames=range(0, len(x_vals), 5),
+                              init_func=init, blit=True, interval=20)
+plt.close()
+HTML(ani.to_jshtml())
+</code></pre>
+<h3 id="to-animate-simple-or-damped-pendulum">To Animate Simple or Damped Pendulum</h3>
+<p>Just replace:</p>
+<pre><code class="language-python">theta_anim, _ = simulate(b=0.5, A=1.2, omega_d=2/3)
+</code></pre>
+<p>With:
+- Simple: <code>simulate(b=0, A=0, use_sin=False)</code>
+- Damped: <code>simulate(b=0.2, A=0, use_sin=False)</code></p>
+<hr/>
+<h2 id="4-extensions-and-advanced-explorations">4. Extensions and Advanced Explorations</h2>
 <ul>
-<li><strong>Periodic motion</strong> occurs for weak forcing.  </li>
-<li><strong>Resonance</strong> amplifies oscillations when <span class="arithmatex">\(\omega \approx \omega_0\)</span>.  </li>
-<li><strong>Chaos</strong> emerges for specific parameter combinations, observable in <strong>Poincaré sections</strong> and <strong>phase portraits</strong>.  </li>
+<li><strong>Phase Portraits &amp; Poincaré Sections</strong>: Reveal geometry of motion and transitions to chaos.</li>
+<li><strong>Bifurcation Diagrams</strong>: Vary forcing amplitude <span class="arithmatex">\(A\)</span> or frequency <span class="arithmatex">\(\omega\)</span> and plot long-term values.</li>
+<li><strong>Energy Analysis</strong>: Study how energy is gained/lost under forcing and damping.</li>
+<li><strong>Lyapunov Exponents</strong>: Quantify sensitivity to initial conditions (chaos).</li>
+<li><strong>Double Pendulum</strong>: A 2-link pendulum introduces deeper chaos with no external force.</li>
+<li><strong>Planetary Gravity</strong>: Modify <span class="arithmatex">\(g\)</span> to simulate behavior on Mars, Moon, etc.</li>
 </ul>
-<h4 id="5-practical-applications"><strong>5. Practical Applications</strong></h4>
-<ul>
-<li><strong>Energy Harvesting</strong>: Similar principles are used in vibration-based power generation.  </li>
-<li><strong>Mechanical Systems</strong>: Used in <strong>suspension bridges, oscillating circuits, and robotics</strong>.  </li>
-<li><strong>Electrical Analogies</strong>: Equivalent to driven <strong>RLC circuits</strong> in electronics.  </li>
-</ul>
-<h4 id="6-conclusion"><strong>6. Conclusion</strong></h4>
-<p>The forced damped pendulum exhibits <strong>diverse behaviors</strong> based on damping and forcing conditions. <strong>Numerical simulations</strong> reveal transitions from periodic to chaotic motion, with practical implications in <strong>engineering and physics</strong>.  </p>
+<hr/>
+<h2 id="5-conclusion">5. Conclusion</h2>
+<p>This project comprehensively examined pendulum dynamics in three stages:</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Damping</th>
+<th>Forcing</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple Pendulum</td>
+<td>✘</td>
+<td>✘</td>
+<td>Periodic</td>
+</tr>
+<tr>
+<td>Damped Pendulum</td>
+<td>✔</td>
+<td>✘</td>
+<td>Decaying oscillations</td>
+</tr>
+<tr>
+<td>Forced Damped</td>
+<td>✔</td>
+<td>✔</td>
+<td>Periodic / Quasiperiodic / Chaotic</td>
+</tr>
+</tbody>
+</table>
+<p>We:
+- Derived differential equations
+- Simulated each case using Runge-Kutta
+- Visualized the systems with graphs and animations
+- Proposed extensions into bifurcations, chaos, and energy studies</p>
+<p>The forced damped pendulum, though conceptually simple, becomes a gateway into the study of nonlinear systems and chaos — illustrating how deterministic rules can yield unpredictable motion.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
