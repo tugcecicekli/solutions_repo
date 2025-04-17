@@ -30,6 +30,26 @@ $$\frac{d^2\theta}{dt^2} + \omega_0^2 \theta = 0, \quad \omega_0 = \sqrt{\frac{g
 $$\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \omega_0^2 \theta = 0$$
 
 ---
+Absolutely! Here's the **general formula for a nonlinear forced pendulum**:
+
+---
+
+### Forced Pendulum 
+
+$$\frac{d^2\theta}{dt^2} + \omega_0^2 \sin(\theta) = A \cos(\omega t)$$
+
+Where:
+
+- $\theta(t)$: angular displacement (in radians)  
+- $\omega_0 = \sqrt{\frac{g}{L}}$: natural frequency of the pendulum  
+- $A$: amplitude of the external driving force (torque per unit mass and length)  
+- $\omega$: angular frequency of the driving force  
+- $t$: time  
+- $g$: gravitational acceleration  
+- $L$: length of the pendulum
+
+---
+
 
 ### Forced Damped Pendulum
 
