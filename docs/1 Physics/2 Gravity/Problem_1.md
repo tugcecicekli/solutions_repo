@@ -6,6 +6,39 @@
 ## Motivation
 
 The elegant relationship between the **square of the orbital period (T)** and the **cube of the orbital radius (r)** for circular orbits, known as **Kepler’s Third Law**, reveals deep insights into gravitational interactions. This project aims to derive this law starting from Newtonian mechanics and differential equations, explore its real-world implications, and validate it through simulations and animations.
+---
+
+Kepler’s Third Law reveals a fundamental relationship in orbital mechanics:
+
+$$T^2 \propto r^3$$
+
+This law connects the period of revolution $T$ of a planet (or satellite) with the radius $r$ of its circular orbit. It's a powerful tool used in celestial mechanics, satellite design, and calculating masses of celestial bodies.
+
+---
+
+## Theoretical Derivation using Newtonian Mechanics
+
+### Step 1: Gravitational Force
+Newton’s Law of Gravitation:
+$$F_g = \frac{G M m}{r^2}$$
+
+### Step 2: Centripetal Force for Circular Orbits
+$$F_c = \frac{m v^2}{r}$$
+
+### Step 3: Equating Forces
+$$\frac{G M m}{r^2} = \frac{m v^2}{r}
+\Rightarrow v^2 = \frac{G M}{r}$$
+
+### Step 4: Express Orbital Period
+$$T = \frac{2\pi r}{v}
+\Rightarrow T^2 = \frac{4\pi^2 r^2}{v^2}$$
+
+Substitute $v^2$:
+$$T^2 = \frac{4\pi^2 r^2}{\frac{G M}{r}} = \frac{4\pi^2 r^3}{G M}$$
+
+Final Form:
+$$T^2 = \left( \frac{4\pi^2}{G M} \right) r^3
+\Rightarrow T^2 \propto r^3$$
 
 ---
 
