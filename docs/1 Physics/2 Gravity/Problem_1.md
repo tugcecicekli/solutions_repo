@@ -235,6 +235,7 @@ $$T^2 \propto a^3$$
 Where $a$ is the **semi-major axis**. This law still holds but requires integration over elliptical motion, using:
 
 - **Vis-viva equation:**
+- 
   $$v^2 = G M \left( \frac{2}{r} - \frac{1}{a} \right)$$
 
 - **Orbital energy methods**
