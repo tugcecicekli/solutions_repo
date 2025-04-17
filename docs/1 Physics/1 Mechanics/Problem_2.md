@@ -186,6 +186,8 @@ plt.tight_layout()
 plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1mNZ4qqAkfLGtsvfvqSBXUXPuzzm0EqMt#scrollTo=X-2nJcXnjtpP)
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown-9.png?raw=true)
+
 ---
 ## 5. Visualizing the Forced Damped Pendulum
 
