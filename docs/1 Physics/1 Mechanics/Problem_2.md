@@ -61,6 +61,7 @@ plt.grid(True)
 plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1mZ4tKUUQdA2M2ejXxRenjbDZ4mv9cX8s#scrollTo=AMg6N81d6J_D)
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown5.png?raw=true)
 ---
 
 ## 3. Visualizing the Damped Pendulum 
