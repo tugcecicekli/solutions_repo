@@ -117,6 +117,7 @@ plt.annotate(f"Slope: {slope:.2f}", xy=(0.65 * max(R_cubed), 0.85 * max(T_square
 plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1Gzs6NYgJDfira_n9CpCjV6JsMjYsQ-4I#scrollTo=pRkikqHFYLIU)
+![Example Imnage](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown.png?raw=true)
 ---
 
 ## Verifying Kepler’s Law
