@@ -272,6 +272,7 @@ for i in range(3):
 plt.tight_layout()
 plt.show()
 ```
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown-6.png?raw=true)
 
 ## 6. Extensions and Advanced Explorations
 
