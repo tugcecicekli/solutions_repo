@@ -272,6 +272,7 @@ for i in range(3):
 plt.tight_layout()
 plt.show()
 ```
+Visit: [Colab](https://colab.research.google.com/drive/1J1BiWvt02427kZD9_FCtcQln2kks8YP0#scrollTo=DyuOwt_mgOai)
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/1%20Mechanics/Unknown-6.png?raw=true)
 
 ## 6. Extensions and Advanced Explorations
