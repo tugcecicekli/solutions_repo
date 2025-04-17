@@ -5,83 +5,83 @@
 
 ## Motivation
 
-The pendulum is more than a classic classroom example — it's a portal into the world of nonlinear physics. From the elegance of simple harmonic motion to the unpredictability of chaos, the pendulum reveals how small changes in conditions lead to vastly different outcomes. In this project, we:
+The pendulum is a powerful model in physics. From simple harmonic motion to chaos, it demonstrates how small changes — damping and forcing — result in complex behavior. This project investigates:
 
-- Explore **three types** of pendulums:
-  1. Simple (undamped, unforced)
-  2. Damped (no forcing)
-  3. Forced Damped (full system)
-- Analyze them **theoretically and computationally**
-- Visualize them through **graphs and animations**
-- Extend our study into **chaotic behavior and bifurcations**
+- **Simple Pendulum**
+- **Damped Pendulum**
+- **Forced Damped Pendulum**
 
 ---
 
 ## 1. Differential Equations
 
-### A. Simple Pendulum
+### Simple Pendulum
 
-$$\frac{d^2\theta}{dt^2} + \omega_0^2 \sin(\theta) = 0, \quad \omega_0 = \sqrt{\frac{g}{L}}$$
+$$\frac{d^2\theta}{dt^2} + \omega_0^2 \sin(\theta) = 0$$
 
-**Small-angle approximation**:
+For small angles:
 
-$$\frac{d^2\theta}{dt^2} + \omega_0^2 \theta = 0$$
-
----
-
-### B. Damped Pendulum
-
-$$\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \omega_0^2 \sin(\theta) = 0$$
+$$\frac{d^2\theta}{dt^2} + \omega_0^2 \theta = 0, \quad \omega_0 = \sqrt{\frac{g}{L}}$$
 
 ---
 
-### C. Forced Damped Pendulum
+### Damped Pendulum
+
+$$\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \omega_0^2 \theta = 0$$
+
+---
+
+### Forced Damped Pendulum
 
 $$\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \omega_0^2 \sin(\theta) = A \cos(\omega t)$$
 
-Where:
-- $\theta$: angular displacement  
-- $b$: damping coefficient  
-- $A$: amplitude of driving force  
-- $\omega$: driving frequency  
-
 ---
 
-## 2. Python Simulation and Visualization
-
-### Imports and Parameters
+## 2. Visualizing the Simple Pendulum (Small Angle Approximation)
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-```
 
-```python
-# Constants
+# Parameters
 g = 9.81
 L = 1.0
 omega0 = np.sqrt(g / L)
 theta0 = 0.2
-omega_init = 0.0
-dt = 0.01
-t_max = 20
-t = np.arange(0, t_max, dt)
-```
+t = np.linspace(0, 10, 1000)
+theta = theta0 * np.cos(omega0 * t)
 
+# Plot
+plt.figure(figsize=(10, 4))
+plt.plot(t, theta)
+plt.title("Simple Pendulum (Small Angle Approximation)")
+plt.xlabel("Time (s)")
+plt.ylabel("Angle (rad)")
+plt.grid(True)
+plt.show()
+```
+Visit: [Colab](https://colab.research.google.com/drive/1mZ4tKUUQdA2M2ejXxRenjbDZ4mv9cX8s#scrollTo=AMg6N81d6J_D)
 ---
 
-### Runge-Kutta Solver 
+## 3. Visualizing the Damped Pendulum 
 
 ```python
-def rk4_step(theta, omega, t, dt, b=0, A=0, omega_d=0, use_sin=True):
+# Damped system using RK4
+import numpy as np
+import matplotlib.pyplot as plt
+dt = 0.01
+t = np.arange(0, 20, dt)
+b = 0.3  # damping
+theta = np.zeros_like(t)
+omega = np.zeros_like(t)
+theta[0] = 0.5
+# Define omega0 here 
+omega0 = 1.0  # You can change this value to the desired natural frequency
+
+def rk4_damped(theta, omega, t, dt, b, omega0):
     def f(t, y):
         theta, omega = y
-        dtheta = omega
-        if use_sin:
-            domega = -b * omega - omega0**2 * np.sin(theta) + A * np.cos(omega_d * t)
-        else:
-            domega = -b * omega - omega0**2 * theta + A * np.cos(omega_d * t)
-        return np.array([dtheta, domega])
+        return np.array([omega, -b * omega - omega0**2 * theta])
     
     y = np.array([theta, omega])
     k1 = f(t, y)
@@ -90,49 +90,79 @@ def rk4_step(theta, omega, t, dt, b=0, A=0, omega_d=0, use_sin=True):
     k4 = f(t + dt, y + dt*k3)
     return y + dt * (k1 + 2*k2 + 2*k3 + k4)/6
 
-def simulate(b=0, A=0, omega_d=0, use_sin=True):
-    theta = np.zeros_like(t)
-    omega = np.zeros_like(t)
-    theta[0], omega[0] = theta0, omega_init
-    for i in range(1, len(t)):
-        theta[i], omega[i] = rk4_step(theta[i-1], omega[i-1], t[i-1], dt, b, A, omega_d, use_sin)
-    return theta, omega
-```
+for i in range(1, len(t)):
+    theta[i], omega[i] = rk4_damped(theta[i-1], omega[i-1], t[i-1], dt, b, omega0)
 
----
 
-### Simulate and Plot All Three Systems
-
-```python
-theta_simple, _ = simulate(b=0, A=0, use_sin=False)
-theta_damped, _ = simulate(b=0.2, A=0, use_sin=False)
-theta_forced, _ = simulate(b=0.5, A=1.2, omega_d=2/3)
-
-plt.figure(figsize=(12, 6))
-plt.plot(t, theta_simple, label='Simple Pendulum')
-plt.plot(t, theta_damped, label='Damped Pendulum')
-plt.plot(t, theta_forced, label='Forced Damped Pendulum')
-plt.title("Pendulum Motion Comparison")
+plt.figure(figsize=(10, 4))
+plt.plot(t, theta)
+plt.title("Damped Pendulum Motion")
 plt.xlabel("Time (s)")
 plt.ylabel("Angle (rad)")
-plt.legend()
 plt.grid(True)
 plt.show()
 ```
+Visit: [Colab](https://colab.research.google.com/drive/1mNZ4qqAkfLGtsvfvqSBXUXPuzzm0EqMt#scrollTo=BRT2yI8kOk18)
+---
+
+## 4. Visualizing the Forced Damped Pendulum
+
+```python
+# Forced Damped Pendulum Simulation
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+omega0 = 2
+dt = 0.01
+t = np.arange(0, 10, dt)
+A = 1.2
+omega_d = 2/3
+b = 0.5
+theta = np.zeros_like(t)
+omega = np.zeros_like(t)
+theta[0] = 0.5
+
+def rk4_forced(theta, omega, t, dt, b, A, omega_d, omega0):
+    def f(t, y):
+        theta, omega = y
+        return np.array([omega, -b * omega - omega0**2 * np.sin(theta) + A * np.cos(omega_d * t)])
+    
+    y = np.array([theta, omega])
+    k1 = f(t, y)
+    k2 = f(t + dt/2, y + dt*k1/2)
+    k3 = f(t + dt/2, y + dt*k2/2)
+    k4 = f(t + dt, y + dt*k3)
+    return y + dt * (k1 + 2*k2 + 2*k3 + k4)/6
+
+for i in range(1, len(t)):
+    theta[i], omega[i] = rk4_forced(theta[i-1], omega[i-1], t[i-1], dt, b, A, omega_d, omega0)
+
+# Plot
+plt.figure(figsize=(10, 4))
+plt.plot(t, theta)
+plt.title("Forced Damped Pendulum Motion")
+plt.xlabel("Time (s)")
+plt.ylabel("Angle (rad)")
+plt.grid(True)
+plt.show()
+```
+Visit: [Colab](https://colab.research.google.com/drive/1J1BiWvt02427kZD9_FCtcQln2kks8YP0)
 
 ---
 
-## 3. Pendulum Animation (Colab-Ready)
-
-### Animation Code for Forced Damped Pendulum
+## 5. Animation of the Forced Damped Pendulum
 
 ```python
 import matplotlib.animation as animation
 from IPython.display import HTML
+import numpy as np # This was missing
 
-theta_anim, _ = simulate(b=0.5, A=1.2, omega_d=2/3)
-x_vals = L * np.sin(theta_anim)
-y_vals = -L * np.cos(theta_anim)
+# Assuming L represents the length of the pendulum, set it to a reasonable value
+L = 1  # You can adjust this value as needed
+
+x_vals = L * np.sin(theta)
+y_vals = -L * np.cos(theta)
 
 fig, ax = plt.subplots(figsize=(6, 6))
 ax.set_xlim(-1.2, 1.2)
@@ -164,22 +194,10 @@ ani = animation.FuncAnimation(fig, animate, frames=range(0, len(x_vals), 5),
 plt.close()
 HTML(ani.to_jshtml())
 ```
-
-### To Animate Simple or Damped Pendulum
-
-Just replace:
-
-```python
-theta_anim, _ = simulate(b=0.5, A=1.2, omega_d=2/3)
-```
-
-With:
-- Simple: `simulate(b=0, A=0, use_sin=False)`
-- Damped: `simulate(b=0.2, A=0, use_sin=False)`
-
+Visit: [Colab](https://colab.research.google.com/drive/1J1BiWvt02427kZD9_FCtcQln2kks8YP0#scrollTo=vd6dcAXcQ5U9)
 ---
 
-## 4. Extensions and Advanced Explorations
+## 6. Extensions and Advanced Explorations
 
 - **Phase Portraits & Poincaré Sections**: Reveal geometry of motion and transitions to chaos.
 - **Bifurcation Diagrams**: Vary forcing amplitude $A$ or frequency $\omega$ and plot long-term values.
@@ -190,7 +208,7 @@ With:
 
 ---
 
-## 5. Conclusion
+## 7. Conclusion
 
 This project comprehensively examined pendulum dynamics in three stages:
 
