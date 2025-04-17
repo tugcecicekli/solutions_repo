@@ -30,9 +30,6 @@ $$\frac{d^2\theta}{dt^2} + \omega_0^2 \theta = 0, \quad \omega_0 = \sqrt{\frac{g
 $$\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \omega_0^2 \theta = 0$$
 
 ---
-Absolutely! Here's the **general formula for a nonlinear forced pendulum**:
-
----
 
 ### Forced Pendulum 
 
