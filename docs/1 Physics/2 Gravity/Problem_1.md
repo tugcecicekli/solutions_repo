@@ -296,7 +296,7 @@ M_earth = 4 * np.pi**2 * r_earth_moon**3 / (G * T_moon**2)
 print(f"Mass of Earth ≈ {M_earth:.2e} kg")
 ```
 
-Output: **$ 5.97 \times 10^{24} \, \text{kg}$** (correct)
+Output: ** $5.97 \times 10^{24} \, \text{kg}$ ** (correct)
 
 ---
 
@@ -315,7 +315,7 @@ M_sun = 4 * np.pi**2 * r_earth_sun**3 / (G * T_earth**2)
 print(f"Mass of Sun ≈ {M_sun:.2e} kg")
 ```
 
-Output: **$ 1.99 \times 10^{30} \, \text{kg}$** (correct)
+Output: ** $1.99 \times 10^{30} \, \text{kg}$ ** (correct)
 
 ---
 
