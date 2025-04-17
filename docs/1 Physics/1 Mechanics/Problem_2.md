@@ -198,6 +198,80 @@ HTML(ani.to_jshtml())
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1J1BiWvt02427kZD9_FCtcQln2kks8YP0#scrollTo=vd6dcAXcQ5U9)
 ---
+```
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+g = 9.81
+L = 1.0
+omega0 = np.sqrt(g / L)
+theta0 = 0.2
+omega_init = 0.0
+dt = 0.01
+t_max = 20
+t = np.arange(0, t_max, dt)
+
+# Unified RK4 method
+def rk4_step(theta, omega, t, dt, b=0, A=0, omega_d=0, use_sin=True):
+    def f(t, y):
+        theta, omega = y
+        dtheta = omega
+        if use_sin:
+            domega = -b * omega - omega0**2 * np.sin(theta) + A * np.cos(omega_d * t)
+        else:
+            domega = -b * omega - omega0**2 * theta + A * np.cos(omega_d * t)
+        return np.array([dtheta, domega])
+    y = np.array([theta, omega])
+    k1 = f(t, y)
+    k2 = f(t + dt/2, y + dt*k1/2)
+    k3 = f(t + dt/2, y + dt*k2/2)
+    k4 = f(t + dt, y + dt*k3)
+    return y + dt * (k1 + 2*k2 + 2*k3 + k4)/6
+
+def simulate(b=0, A=0, omega_d=0, use_sin=True):
+    theta = np.zeros_like(t)
+    omega = np.zeros_like(t)
+    theta[0], omega[0] = theta0, omega_init
+    for i in range(1, len(t)):
+        theta[i], omega[i] = rk4_step(theta[i-1], omega[i-1], t[i-1], dt, b, A, omega_d, use_sin)
+    return theta, omega
+
+# Simulate all three
+theta1, omega1 = simulate(b=0, A=0, use_sin=False)                   # Simple
+theta2, omega2 = simulate(b=0.2, A=0, use_sin=False)                 # Damped
+theta3, omega3 = simulate(b=0.5, A=1.2, omega_d=2/3, use_sin=True)   # Forced
+
+# Plot layout
+fig, axs = plt.subplots(3, 2, figsize=(12, 10))
+titles = ["1) Simple Pendulum", "2) Damped Pendulum", "3) Forced Pendulum"]
+colors = ['red', 'blue', 'teal']
+
+# Time Series
+axs[0, 0].plot(t, theta1, color=colors[0])
+axs[1, 0].plot(t, theta2, color=colors[1])
+axs[2, 0].plot(t, theta3, color=colors[2])
+for i in range(3):
+    axs[i, 0].set_title("Time Series")
+    axs[i, 0].set_xlabel("Time (s)")
+    axs[i, 0].set_ylabel("θ (rad)")
+    axs[i, 0].grid(True)
+    axs[i, 0].annotate(titles[i], xy=(0.95, 0.85), xycoords='axes fraction',
+                      ha='right', fontsize=11, color=colors[i], weight='bold')
+
+# Phase Portraits
+axs[0, 1].plot(theta1, omega1, color=colors[0])
+axs[1, 1].plot(theta2, omega2, color=colors[1])
+axs[2, 1].plot(theta3, omega3, color=colors[2])
+for i in range(3):
+    axs[i, 1].set_title("Phase Portrait")
+    axs[i, 1].set_xlabel("θ (rad)")
+    axs[i, 1].set_ylabel("ω (rad/s)")
+    axs[i, 1].grid(True)
+
+plt.tight_layout()
+plt.show()
+```
 
 ## 6. Extensions and Advanced Explorations
 
