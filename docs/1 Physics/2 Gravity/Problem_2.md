@@ -103,7 +103,9 @@ plt.tight_layout()
 plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1ZKQKWnH0bVhEBpNgUawo7nmMMx6MW80Y#scrollTo=ob5gb7chwMNJ)
+
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-12.png?raw=true)
+
 ---
 
 ### **3.2 Numerical Results Table**
@@ -143,7 +145,9 @@ plt.tight_layout()
 plt.show()
 ``` 
 Visit: [Colab](https://colab.research.google.com/drive/1ZKQKWnH0bVhEBpNgUawo7nmMMx6MW80Y#scrollTo=ob5gb7chwMNJ)
+
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-13.png?raw=true)
+
 ---
 
 ### 3.4 Cosmic Velocity Ratios (v2/v1 and v3/v2)
@@ -172,7 +176,9 @@ plt.tight_layout()
 plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1ZKQKWnH0bVhEBpNgUawo7nmMMx6MW80Y#scrollTo=ob5gb7chwMNJ)
+
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-14.png?raw=true)
+
 ---
 
 ### 3.5 3D-Like Plot of Velocities vs Mass and Radius
@@ -199,6 +205,9 @@ plt.tight_layout()
 plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1ZKQKWnH0bVhEBpNgUawo7nmMMx6MW80Y#scrollTo=ob5gb7chwMNJ)
+
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-15.png?raw=true)
+
 ---
 
 ### 3.6 Animated Escape Velocity vs. Radius for Increasing Mass
@@ -249,6 +258,7 @@ plt.close()
 HTML(ani.to_jshtml())
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1ZKQKWnH0bVhEBpNgUawo7nmMMx6MW80Y#scrollTo=ob5gb7chwMNJ)
+
 ---
 
 ## **4. Engineering and Mission Design**
