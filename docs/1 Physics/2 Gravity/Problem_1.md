@@ -162,43 +162,66 @@ Visit: [Colab](https://colab.research.google.com/drive/1Gzs6NYgJDfira_n9CpCjV6Js
 Let’s plot $T^2$ vs $r^3$ to see the linear relationship:
 
 ```python
+!pip install ace_tools # Install the required 'ace_tools' module
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
 
-G = 6.67430e-11  # gravitational constant
-M = 5.972e24     # mass of Earth
+# Orbital data for planets (radius in AU, period in years)
+planets = {
+    "Mercury": {"r_AU": 0.39, "T_years": 0.240846},
+    "Venus": {"r_AU": 0.723, "T_years": 0.615},
+    "Earth": {"r_AU": 1.000, "T_years": 1.000},
+    "Mars": {"r_AU": 1.524, "T_years": 1.881}
+}
 
-# Ensure radii and periods have the same length
-num_points = 5  # Or any other desired number of points
-radii = np.linspace(1e7, 5e8, num_points) # changed the number of points to 5
-periods = 2 * np.pi * np.sqrt(radii**3 / (G * M))
+# Convert to arrays
+names = list(planets.keys())
+r_AU = np.array([planets[p]["r_AU"] for p in names])
+T_years = np.array([planets[p]["T_years"] for p in names])
 
-plt.figure()
-plt.plot(radii, periods, label='T vs r')
-plt.xlabel('Orbital Radius (m)')
-plt.ylabel('Orbital Period (s)')
-plt.title('Orbital Period vs Radius')
+# Calculate T^2 and r^3
+T_squared = T_years**2
+r_cubed = r_AU**3
+
+# Create a DataFrame for visualization
+df = pd.DataFrame({
+    "Planet": names,
+    "r (AU)": r_AU,
+    "T (years)": T_years,
+    "r^3 (AU^3)": r_cubed,
+    "T^2 (years^2)": T_squared
+})
+
+# Plotting T^2 vs r^3
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x=r_cubed, y=T_squared, hue=names, s=100)
+plt.plot(r_cubed, T_squared, 'k--', alpha=0.6)  # Line for visual confirmation
+plt.xlabel("r³ (AU³)")
+plt.ylabel("T² (years²)")
+plt.title("Verification of Kepler's Third Law: T² vs r³")
 plt.grid(True)
-plt.legend()
+plt.legend(title="Planet")
+plt.tight_layout()
 plt.show()
 
-T_squared = periods**2
-r_cubed = radii**3
-
-plt.figure()
-plt.plot(r_cubed, T_squared, label='T² vs r³')
-plt.xlabel('r³ (m³)')
-plt.ylabel('T² (s²)')
-plt.title("Verification of Kepler's Third Law")
-plt.grid(True)
-plt.legend()
-plt.show()
+import ace_tools as tools; tools.display_dataframe_to_user(name="Planetary Orbital Data", dataframe=df)
 ```
-Visit:[Colab](https://colab.research.google.com/drive/1Gzs6NYgJDfira_n9CpCjV6JsMjYsQ-4I#scrollTo=pRkikqHFYLIU)
+Visit:[Colab](https://colab.research.google.com/drive/1Gzs6NYgJDfira_n9CpCjV6JsMjYsQ-4I#scrollTo=gO_MWYFbhfvc)
 
-![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-2.png?raw=true)
 
-![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-5.png?raw=true)
+### Planetary Orbital Data (AU & Years)
+
+| Planet  | Orbital Radius \( r \) (AU) | Orbital Period \( T \) (years) | \( r^3 \) (AU³) | \( T^2 \) (years²) |
+|---------|-----------------------------|-------------------------------|------------------|--------------------|
+| Mercury | 0.390                       | 0.240846                      | 0.059319         | 0.058007           |
+| Venus   | 0.723                       | 0.615                         | 0.377933         | 0.378225           |
+| Earth   | 1.000                       | 1.000                         | 1.000000         | 1.000000           |
+| Mars    | 1.524                       | 1.881                         | 3.539606         | 3.538161           |
+
+
+
 
 ---
 
