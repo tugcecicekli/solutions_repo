@@ -143,6 +143,7 @@ plt.tight_layout()
 plt.show()
 ``` 
 Visit: [Colab](https://colab.research.google.com/drive/1ZKQKWnH0bVhEBpNgUawo7nmMMx6MW80Y#scrollTo=ob5gb7chwMNJ)
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-13.png?raw=true)
 ---
 
 ### 3.4 Cosmic Velocity Ratios (v2/v1 and v3/v2)
