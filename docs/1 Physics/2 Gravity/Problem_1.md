@@ -159,7 +159,6 @@ Visit: [Colab](https://colab.research.google.com/drive/1Gzs6NYgJDfira_n9CpCjV6Js
 
 ## Verifying Kepler’s Law
 
-Let’s plot $T^2$ vs $r^3$ to see the linear relationship:
 
 ```python
 !pip install ace_tools # Install the required 'ace_tools' module
