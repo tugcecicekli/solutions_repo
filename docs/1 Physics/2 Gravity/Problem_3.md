@@ -199,6 +199,9 @@ plt.axis('equal')
 plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1tmNx00N0d6ZO2M9a7sIeov0q_ArNJI7H#scrollTo=D2oE4rHnG28i)
+
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-16.png?raw=true)
+
 ---
 
 ### **5. Discussion**
