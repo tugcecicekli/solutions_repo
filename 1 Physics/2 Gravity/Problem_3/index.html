@@ -60,6 +60,32 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 3</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-introduction">1. Introduction</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-theoretical-background">2. Theoretical Background</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#21-governing-equations">2.1 Governing Equations</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-simulation-code">3. Simulation Code</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#visit-colab">Visit: Colab</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-animation-code">4. Animation Code</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#visit-colab_1">Visit: Colab</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#5-discussion">5. Discussion</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#6-conclusion">6. Conclusion</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,101 +198,204 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-3">Problem 3</h1>
-<h1 id="trajectories-of-a-freely-released-payload-near-earth"><strong>Trajectories of a Freely Released Payload Near Earth</strong></h1>
-<h2 id="1-introduction"><strong>1. Introduction</strong></h2>
-<p>When a payload is released from a moving rocket near Earth, its motion depends on <strong>initial velocity, altitude, and gravitational forces</strong>. Understanding these trajectories is essential for <strong>orbital insertion, reentry planning, and satellite deployment</strong>.  </p>
-<p>The possible paths include:<br/>
-- <strong>Elliptical orbits</strong> (if velocity is below escape velocity).<br/>
-- <strong>Parabolic trajectories</strong> (if velocity equals escape velocity).<br/>
-- <strong>Hyperbolic escape paths</strong> (if velocity exceeds escape velocity).<br/>
-- <strong>Suborbital trajectories</strong> (if reentry occurs).  </p>
+<h2 id="trajectories-of-a-freely-released-payload-near-earth"><strong>Trajectories of a Freely Released Payload Near Earth</strong></h2>
+<h3 id="1-introduction"><strong>1. Introduction</strong></h3>
+<p>This project analyzes the trajectories of a freely released payload near Earth, focusing on gravitational forces and initial conditions (velocity, altitude). The goal is to simulate and visualize possible trajectories (elliptical, parabolic, hyperbolic) using Python in Google Colab.</p>
+<p>The main challenge is to understand how different initial velocities (ranging from 5 km/s to 13 km/s) influence whether the payload stays in orbit, reenters, or escapes Earth's gravity.</p>
 <hr/>
 <h2 id="2-theoretical-background"><strong>2. Theoretical Background</strong></h2>
 <h3 id="21-governing-equations"><strong>2.1 Governing Equations</strong></h3>
-<p>Using Newton’s Second Law and Universal Gravitation, the equation of motion for a payload influenced only by Earth’s gravity is:</p>
-<div class="arithmatex">\[\mathbf{F} = m \mathbf{a} = -\frac{G M m}{r^2} \hat{r}\]</div>
-<p>which leads to the <strong>gravitational acceleration</strong>:</p>
-<div class="arithmatex">\[\mathbf{a} = -\frac{G M}{r^2} \hat{r}\]</div>
-<p>where:<br/>
-- <span class="arithmatex">\(G = 6.674 \times 10^{-11}\)</span> m³/kg/s² (gravitational constant).<br/>
-- <span class="arithmatex">\(M = 5.972 \times 10^{24}\)</span> kg (mass of Earth).<br/>
-- <span class="arithmatex">\(r\)</span> is the payload’s radial distance from Earth’s center.  </p>
-<p>For <strong>different initial velocities</strong> <span class="arithmatex">\(( v_0)\)</span> at release altitude <span class="arithmatex">\(r_0\)</span>:<br/>
-- If <span class="arithmatex">\(v_0 &lt; v_1\)</span> (orbital velocity): <strong>Suborbital reentry</strong>.<br/>
-- If <span class="arithmatex">\(v_0 = v_1\)</span>: <strong>Circular orbit</strong>.<br/>
-- If <span class="arithmatex">\(v_1 &lt; v_0 &lt; v_2\)</span> (escape velocity): <strong>Elliptical orbit</strong>.<br/>
-- If <span class="arithmatex">\(v_0 = v_2\)</span>: <strong>Parabolic escape</strong>.<br/>
-- If <span class="arithmatex">\(v_0 &gt; v_2\)</span>: <strong>Hyperbolic escape</strong>.  </p>
+<p>The gravitational force between Earth and the payload is given by:</p>
+<div class="arithmatex">\[
+F = \frac{GMm}{r^2}
+\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(G\)</span> = Gravitational constant (6.67430 × 10⁻¹¹ m³ kg⁻¹ s⁻²)</li>
+<li><span class="arithmatex">\(M\)</span> = Mass of the Earth (5.972 × 10²⁴ kg)</li>
+<li><span class="arithmatex">\(m\)</span> = Mass of the payload</li>
+<li><span class="arithmatex">\(r\)</span> = Distance from Earth's center to the payload</li>
+</ul>
+<h4 id="22-equations-of-motion"><strong>2.2 Equations of Motion:</strong></h4>
+<p>The acceleration acting on the payload is:</p>
+<div class="arithmatex">\[
+a = \frac{GM}{r^2}
+\]</div>
+<p>The second-order differential equation governing the motion is:</p>
+<div class="arithmatex">\[
+\frac{d^2 \vec{r}}{dt^2} = -\frac{GM}{r^2} \hat{r}
+\]</div>
 <hr/>
-<h2 id="3-numerical-simulation"><strong>3. Numerical Simulation</strong></h2>
-<p>We simulate a payload's trajectory using <strong>Runge-Kutta methods</strong> to solve the equation of motion in two dimensions.</p>
-<h3 id="python-implementation"><strong>Python Implementation</strong></h3>
-<pre><code class="language-python">import numpy as np
+<h2 id="3-simulation-code"><strong>3. Simulation Code</strong></h2>
+<pre><code class="language-python"># Import necessary libraries
+import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
-from scipy.constants import G
 
-# Define Earth parameters
-M_earth = 5.972e24  # kg
-R_earth = 6.371e6  # meters
+# Gravitational constant and Earth parameters
+G = 6.67430e-11  # m^3 kg^-1 s^-2
+M = 5.972e24     # kg
+R_earth = 6371e3 # m
 
 # Define the equations of motion
-def equations(t, state):
-    x, y, vx, vy = state
-    r = np.sqrt(x**2 + y**2)
-    ax = -G * M_earth * x / r**3
-    ay = -G * M_earth * y / r**3
-    return [vx, vy, ax, ay]
+def equations(t, y):
+    r, vr, theta, vtheta = y
+    ar = -G * M / r**2 + r * vtheta**2
+    atheta = -2 * vr * vtheta / r
+    return [vr, ar, vtheta, atheta]
 
-# Initial conditions: Release altitude and velocity
-altitude = 400e3  # 400 km above Earth
-r0 = R_earth + altitude
-v0_values = [6.8e3, 7.9e3, 11.2e3]  # Below, at, and above orbital velocity (m/s)
+# Initial conditions
+altitude = 800e3  # 800 km above Earth's surface
+initial_velocities = [5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000]
 
-# Time span
-t_span = (0, 5000)
-t_eval = np.linspace(*t_span, 1000)
+# Time span for simulation
+t_span = (0, 10000)
 
-# Simulate and plot different cases
-plt.figure(figsize=(7, 7))
+# Plot the Earth as a circle
+plt.figure(figsize=(8, 8))
+earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.3, label='Earth')
+plt.gca().add_artist(earth)
 
-for v0 in v0_values:
-    initial_state = [r0, 0, 0, v0]  # (x0, y0, vx0, vy0)
-    sol = solve_ivp(equations, t_span, initial_state, t_eval=t_eval, method='RK45')
+# Loop over different initial velocities
+for vtheta0 in initial_velocities:
+    # Initial conditions for each velocity
+    y0 = [R_earth + altitude, 0, 0, vtheta0]
 
-    plt.plot(sol.y[0], sol.y[1], label=f'v0 = {v0 / 1e3:.1f} km/s')
+    # Solve the equations
+    solution = solve_ivp(equations, t_span, y0, method='RK45', max_step=1)
 
-# Plot Earth
-theta = np.linspace(0, 2*np.pi, 100)
-plt.plot(R_earth * np.cos(theta), R_earth * np.sin(theta), 'k', label='Earth')
+    # Convert polar to Cartesian coordinates
+    x = solution.y[0] * np.cos(solution.y[2])
+    y = solution.y[0] * np.sin(solution.y[2])
 
-plt.xlabel("x (m)")
-plt.ylabel("y (m)")
-plt.title("Payload Trajectories Near Earth")
+    # Plot the trajectory
+    plt.plot(x, y, label=f'v = {vtheta0 / 1000:.1f} km/s')
+
+# Final plot adjustments
+plt.xlabel('x (m)')
+plt.ylabel('y (m)')
+plt.title('Trajectories of Payload Near Earth')
 plt.legend()
-plt.grid()
+plt.axis('equal')
+plt.grid(True)
+plt.show()
+</code></pre>
+<h2 id="visit-colab">Visit: <a href="https://colab.research.google.com/drive/1tmNx00N0d6ZO2M9a7sIeov0q_ArNJI7H#scrollTo=D2oE4rHnG28i">Colab</a></h2>
+<h2 id="4-animation-code"><strong>4. Animation Code</strong></h2>
+<pre><code class="language-python">import matplotlib.animation as animation
+from IPython.display import HTML
+
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.set_xlim(-2e7, 2e7)
+ax.set_ylim(-2e7, 2e7)
+earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.3)
+ax.add_artist(earth)
+line, = ax.plot([], [], 'r-', label='Trajectory')
+
+def init():
+    line.set_data([], [])
+    return line,
+
+def update(frame):
+    vtheta0 = initial_velocities[frame % len(initial_velocities)]
+    y0 = [R_earth + altitude, 0, 0, vtheta0]
+    solution = solve_ivp(equations, t_span, y0, method='RK45', max_step=1)
+    x = solution.y[0] * np.cos(solution.y[2])
+    y = solution.y[0] * np.sin(solution.y[2])
+    line.set_data(x, y)
+    ax.set_title(f'Payload Trajectory (v = {vtheta0 / 1000:.1f} km/s)')
+    return line,
+
+ani = animation.FuncAnimation(fig, update, frames=len(initial_velocities), init_func=init, repeat=True, blit=True)
+plt.legend()
+plt.close()
+HTML(ani.to_jshtml())
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1tmNx00N0d6ZO2M9a7sIeov0q_ArNJI7H#scrollTo=D2oE4rHnG28i">Colab</a></p>
+<pre><code class="language-python"># Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Gravitational constant and Earth parameters
+G = 6.67430e-11  # m^3 kg^-1 s^-2
+M = 5.972e24     # kg
+R_earth = 6371e3 # m
+
+# Differential equations for the motion
+def equations(t, y):
+    r, vr, theta, vtheta = y
+    ar = -G * M / r**2 + r * vtheta**2
+    atheta = -2 * vr * vtheta / r
+    return [vr, ar, vtheta, atheta]
+
+# Initial conditions
+altitude = 800e3  # 800 km above Earth's surface
+initial_position = R_earth + altitude
+initial_velocities = np.arange(5000, 13001, 500)  # Velocities from 5 km/s to 13 km/s
+
+# Time span for simulation
+t_span = (0, 20000)  # Extended time for larger trajectories
+
+# Plot setup
+plt.figure(figsize=(8, 8))
+
+# Plot the Earth as a filled circle
+earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.5, label='Earth')
+plt.gca().add_artist(earth)
+
+# Plot the Earth's center
+plt.plot(0, 0, 'ko', label='Center of Earth')
+
+# Generate trajectories for each initial velocity
+for i, vtheta0 in enumerate(initial_velocities):
+    # Initial conditions for each velocity
+    y0 = [initial_position, 0, np.pi/2, vtheta0]
+
+    # Solve the differential equations
+    solution = solve_ivp(equations, t_span, y0, method='RK45', max_step=10)
+
+    # Convert polar coordinates to Cartesian for plotting
+    x = solution.y[0] * np.cos(solution.y[2])
+    y = solution.y[0] * np.sin(solution.y[2])
+
+    # Plot the trajectory
+    plt.plot(x, y, label=f'Trajectory {i+1} (v={vtheta0/1000:.1f} km/s)')
+
+# Plot customization
+plt.xlabel('x (m)')
+plt.ylabel('y (m)')
+plt.title('Trajectories in a Gravitational Field with Fixed Earth')
+plt.legend(loc='upper left', fontsize=8)
+plt.grid(True)
 plt.axis('equal')
 plt.show()
 </code></pre>
-<p><a href="https://colab.research.google.com/drive/1tmNx00N0d6ZO2M9a7sIeov0q_ArNJI7H">Colab</a></p>
-<p><img alt="Example Image" src="https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-5.png?raw=true"/></p>
+<h2 id="visit-colab_1">Visit: <a href="https://colab.research.google.com/drive/1tmNx00N0d6ZO2M9a7sIeov0q_ArNJI7H#scrollTo=D2oE4rHnG28i">Colab</a></h2>
+<h3 id="5-discussion"><strong>5. Discussion</strong></h3>
+<ol>
+<li>
+<p><strong>Orbital and Escape Dynamics:</strong></p>
+</li>
+<li>
+<p>Velocities below 7.9 km/s result in elliptical orbits.</p>
+</li>
+<li>Velocities around 11.2 km/s result in parabolic trajectories (escape).</li>
+<li>
+<p>Velocities above 11.2 km/s show hyperbolic escape trajectories.</p>
+</li>
+<li>
+<p><strong>Real-World Applications:</strong></p>
+</li>
+<li>
+<p>Satellite launches: Achieving stable orbits with minimum energy.</p>
+</li>
+<li>Reentry planning: Calculating safe descent paths.</li>
+<li>Space missions: Determining escape velocities for interplanetary travel.</li>
+</ol>
 <hr/>
-<h2 id="4-results-and-discussion"><strong>4. Results and Discussion</strong></h2>
-<ul>
-<li><strong>Suborbital (e.g., <span class="arithmatex">\( v_0 = 6.8 \)</span> km/s)</strong>: The payload follows a curved trajectory but falls back to Earth.  </li>
-<li><strong>Orbital Insertion (e.g., <span class="arithmatex">\( v_0 = 7.9 \)</span> km/s)</strong>: The payload enters a stable circular orbit.  </li>
-<li><strong>Escape Trajectory (e.g., <span class="arithmatex">\( v_0 = 11.2 \)</span> km/s)</strong>: The payload follows a hyperbolic path, escaping Earth's gravity.  </li>
-</ul>
-<h3 id="real-world-applications"><strong>Real-World Applications</strong></h3>
-<ul>
-<li><strong>Satellite Deployment</strong>: Space agencies use precise velocity control to achieve stable orbits.  </li>
-<li><strong>Reentry Planning</strong>: Spacecraft must control velocity for safe reentry (e.g., ISS, capsules).  </li>
-<li><strong>Interplanetary Travel</strong>: Higher velocity payloads can escape Earth and travel to Mars or beyond.  </li>
-</ul>
-<hr/>
-<h2 id="5-conclusion"><strong>5. Conclusion</strong></h2>
-<p>This report analyzed the <strong>trajectories of a freely released payload</strong> using theoretical equations and <strong>numerical simulations</strong>. The results confirm how initial velocity dictates whether a payload <strong>reenters, orbits, or escapes</strong>. This understanding is fundamental in <strong>space mission planning, satellite deployment, and interplanetary travel</strong>.</p>
-<p>Future extensions could include <strong>atmospheric drag effects, three-body interactions, or maneuvering thruster effects</strong>.</p>
+<h3 id="6-conclusion"><strong>6. Conclusion</strong></h3>
+<p>By simulating trajectories with varying initial velocities, we demonstrate the critical role of initial speed in determining whether the payload remains bound to Earth or escapes into space. The graphical and animated representations provide a clear visualization of these dynamics.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
