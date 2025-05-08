@@ -20,10 +20,10 @@ These velocities represent thresholds in orbital mechanics, each marking a diffe
 **Concept**: The speed to stay in low circular orbit, counteracting gravity with centripetal acceleration.
 
 **Derivation**:
-$$F_{\text{gravity}} = \frac{GMm}{r^2}, \quad F_{\text{centripetal}} = \frac{mv^2}{r}$$
+$F_{\text{gravity}} = \frac{GMm}{r^2}, \quad F_{\text{centripetal}} = \frac{mv^2}{r}$
 
 Equating the two:
-$$\frac{GMm}{r^2} = \frac{mv_1^2}{r} \Rightarrow v_1 = \sqrt{\frac{GM}{r}}$$
+$\frac{GMm}{r^2} = \frac{mv_1^2}{r} \Rightarrow v_1 = \sqrt{\frac{GM}{r}}$
 
 - *Intuition*: Go too slow, you fall back. Go too fast, you escape.
 
@@ -34,7 +34,7 @@ $$\frac{GMm}{r^2} = \frac{mv_1^2}{r} \Rightarrow v_1 = \sqrt{\frac{GM}{r}}$$
 **Concept**: Minimum speed to reach infinity with zero kinetic energy remaining.
 
 **Energy Approach**:
-$$E = K + U = \frac{1}{2}mv^2 - \frac{GMm}{r} \geq 0 \Rightarrow v_2 = \sqrt{\frac{2GM}{r}}$$
+$E = K + U = \frac{1}{2}mv^2 - \frac{GMm}{r} \geq 0 \Rightarrow v_2 = \sqrt{\frac{2GM}{r}}$
 
 - *Notice*: $v_2 = \sqrt{2} \cdot v_1$. It takes ~41% more speed than orbiting to escape.
 
