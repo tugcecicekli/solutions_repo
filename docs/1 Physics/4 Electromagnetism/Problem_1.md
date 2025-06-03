@@ -166,6 +166,8 @@ plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-#scrollTo=f-tm-PLyyMPQ)
 
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/4%20Electromagnetism/Unknown-43.png?raw=true)
+
 ---
 
 ## Animation Code (Spiral Case)
