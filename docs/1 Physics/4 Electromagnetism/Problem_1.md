@@ -138,7 +138,7 @@ Visit: [Colab](https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0
 
 ---
 
-### 3. Drift Motion (add Electric Field, optional)
+### 3. Drift Motion 
 
 ```python
 E = np.array([0.0, 1.0, 0.0])  # Electric field
