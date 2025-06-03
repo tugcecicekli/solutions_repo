@@ -203,6 +203,8 @@ ax.set_title("3D Interference from Polygon")
 ax.set_zlim(-2, 2)
 plt.show()
 ```
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/3%20Waves/Unknown-18.png?raw=true)
+
 Visit: [Colab](https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-#scrollTo=RE23Izc_flOo)
 
 ---
