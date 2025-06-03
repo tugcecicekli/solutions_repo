@@ -116,6 +116,8 @@ plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-#scrollTo=f-tm-PLyyMPQ)
 
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/4%20Electromagnetism/Unknown-41.png?raw=true)
+
 ---
 
 ### 2. Spiral Motion ($\vec{v}$ has both $\perp$ and $\parallel$ to $\vec{B}$)
