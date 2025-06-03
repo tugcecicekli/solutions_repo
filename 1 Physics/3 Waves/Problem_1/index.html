@@ -172,115 +172,192 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
-<h1 id="interference-patterns-on-a-water-surface"><strong>Interference Patterns on a Water Surface</strong></h1>
-<h2 id="1-introduction"><strong>1. Introduction</strong></h2>
-<p>Wave interference occurs when multiple waves overlap, leading to <strong>constructive</strong> (amplification) and <strong>destructive</strong> (cancellation) interference. On a <strong>water surface</strong>, circular waves from different sources create <strong>complex interference patterns</strong>, which are influenced by the <strong>number, position, and phase of sources</strong>.</p>
-<p>This study investigates <strong>interference patterns from multiple point sources</strong> arranged in <strong>regular polygons</strong>. Understanding such patterns has applications in <strong>acoustics, optics, and fluid dynamics</strong>.</p>
+<h1 id="problem-1_1">Problem 1</h1>
+<h1 id="interference-patterns-on-a-water-surface">Interference Patterns on a Water Surface</h1>
+<h2 id="motivation"><strong>Motivation</strong></h2>
+<p>Wave interference explains how multiple wave sources interact. Water waves from different points (like stones dropped into a pond) create <strong>constructive</strong> (amplifying) and <strong>destructive</strong> (canceling) interference patterns. By simulating these with point sources at the vertices of polygons, we visually understand the superposition principle in 2D wave systems.</p>
 <hr/>
-<h2 id="2-theoretical-background"><strong>2. Theoretical Background</strong></h2>
-<h3 id="21-wave-equation-for-a-point-source"><strong>2.1 Wave Equation for a Point Source</strong></h3>
-<p>A <strong>circular wave</strong> from a point source at position <span class="arithmatex">\(\mathbf{r_i}\)</span> is given by:</p>
-<div class="arithmatex">\[\psi_i(\mathbf{r}, t) = A \cos(k r_i - \omega t + \phi_0)\]</div>
-<p>where:
-- <span class="arithmatex">\(\psi_i(\mathbf{r}, t)\)</span> is the <strong>displacement</strong> at point <span class="arithmatex">\(\mathbf{r}\)</span> and time <span class="arithmatex">\(t\)</span>.
-- <span class="arithmatex">\(A\)</span> is the <strong>amplitude</strong>.
-- <span class="arithmatex">\(k = \frac{2\pi}{\lambda}\)</span> is the <strong>wave number</strong>.
-- <span class="arithmatex">\(\omega = 2\pi f\)</span> is the <strong>angular frequency</strong>.
-- <span class="arithmatex">\(r_i = |\mathbf{r} - \mathbf{r_i}|\)</span> is the <strong>distance</strong> from the source.
-- <span class="arithmatex">\(\phi_0\)</span> is the <strong>initial phase</strong>.</p>
-<h3 id="22-superposition-of-multiple-waves"><strong>2.2 Superposition of Multiple Waves</strong></h3>
-<p>If there are <span class="arithmatex">\(N\)</span> wave sources at positions <span class="arithmatex">\(\mathbf{r_i}\)</span>, the total displacement is:</p>
-<div class="arithmatex">\[\Psi(\mathbf{r}, t) = \sum_{i=1}^{N} A \cos(k r_i - \omega t + \phi_0)\]</div>
-<p>The <strong>interference pattern</strong> results from this sum.</p>
-<h3 id="23-regular-polygon-source-arrangement"><strong>2.3 Regular Polygon Source Arrangement</strong></h3>
-<p>We place sources at the <strong>vertices of a regular polygon</strong> (e.g., <strong>triangle, square, pentagon</strong>) with center at the origin. Each vertex has coordinates:</p>
-<div class="arithmatex">\[\mathbf{r_i} = R (\cos \theta_i, \sin \theta_i)\]</div>
-<p>where <span class="arithmatex">\(\theta_i = \frac{2\pi i}{N}\)</span>, for <span class="arithmatex">\(i = 0, 1, ..., N-1\)</span>.</p>
+<h2 id="wave-theory"><strong>Wave Theory</strong></h2>
+<h3 id="wave-equation-for-a-single-source">Wave Equation for a Single Source:</h3>
+<p>A circular wave from a point <span class="arithmatex">\((x_0, y_0)\)</span> is modeled as:</p>
+<div class="arithmatex">\[
+z(x, y, t) = A \cdot \sin(kr - \omega t + \phi)
+\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(A\)</span>: Amplitude</li>
+<li><span class="arithmatex">\(r = \sqrt{(x - x_0)^2 + (y - y_0)^2}\)</span>: Distance from source</li>
+<li><span class="arithmatex">\(k = \frac{2\pi}{\lambda}\)</span>: Wavenumber</li>
+<li><span class="arithmatex">\(\omega = 2\pi f\)</span>: Angular frequency</li>
+<li><span class="arithmatex">\(\phi\)</span>: Initial phase</li>
+</ul>
+<h3 id="superposition-for-n-sources">Superposition for <span class="arithmatex">\(N\)</span> Sources:</h3>
+<div class="arithmatex">\[
+Z(x, y, t) = \sum_{i=1}^{N} A \cdot \sin(k r_i - \omega t + \phi_i)
+\]</div>
 <hr/>
-<h2 id="3-computational-simulation"><strong>3. Computational Simulation</strong></h2>
-<h3 id="python-implementation"><strong>Python Implementation</strong></h3>
-<p>We simulate <strong>wave interference</strong> for sources placed at the vertices of a <strong>regular polygon</strong> using <strong>NumPy and Matplotlib</strong>.</p>
+<h2 id="setup">Setup</h2>
+<h3 id="install-and-import">Install and Import</h3>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import animation
+from IPython.display import HTML
+</code></pre>
+<hr/>
+<h2 id="1-single-source-simulation-static-animation">1. Single Source Simulation (Static + Animation)</h2>
+<pre><code class="language-python"># Parameters
+A = 1.0         # amplitude
+λ = 2.0         # wavelength
+f = 1.0         # frequency
+ω = 2 * np.pi * f
+k = 2 * np.pi / λ
+phi = 0
 
-# Define wave parameters
-A = 1  # Amplitude
-lambda_wave = 1  # Wavelength
-k = 2 * np.pi / lambda_wave  # Wave number
-omega = 2 * np.pi  # Angular frequency
-N = 5  # Number of sources (Regular pentagon)
-R = 5  # Distance of sources from origin
-grid_size = 200  # Resolution
-
-# Define spatial grid
-x = np.linspace(-10, 10, grid_size)
-y = np.linspace(-10, 10, grid_size)
+# Grid
+x = np.linspace(-10, 10, 500)
+y = np.linspace(-10, 10, 500)
 X, Y = np.meshgrid(x, y)
 
-# Define source positions (vertices of polygon)
-angles = np.linspace(0, 2*np.pi, N, endpoint=False)
-sources = [(R * np.cos(angle), R * np.sin(angle)) for angle in angles]
+# Source
+source = (0, 0)
 
-# Compute wave superposition
-wave_sum = np.zeros_like(X)
+# Distance from source
+R = np.sqrt((X - source[0])**2 + (Y - source[1])**2)
 
-for (x0, y0) in sources:
-    r = np.sqrt((X - x0)**2 + (Y - y0)**2)
-    wave_sum += A * np.cos(k * r)
+# Wave function
+def wave_frame(t):
+    return A * np.sin(k * R - ω * t + phi)
 
-# Plot the interference pattern
-plt.figure(figsize=(7, 7))
-plt.imshow(wave_sum, extent=[-10, 10, -10, 10], cmap="RdBu", origin="lower")
-plt.colorbar(label="Wave Displacement")
-plt.scatter(*zip(*sources), color="black", marker="o", label="Wave Sources")
-plt.title("Interference Pattern for a Regular Pentagon")
-plt.xlabel("x")
-plt.ylabel("y")
-plt.legend()
+# Static heatmap
+plt.figure(figsize=(6, 6))
+plt.imshow(wave_frame(0), extent=[-10, 10, -10, 10], cmap='RdBu', origin='lower')
+plt.title('Single Source - Heatmap')
+plt.colorbar(label='Amplitude')
 plt.show()
 </code></pre>
-<p><a href="https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-">Colab</a></p>
-<p><img alt="Example Image" src="https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/3%20Waves/Unknown-6.png?raw=true"/></p>
+<p>Visit: <a href="https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-#scrollTo=RE23Izc_flOo">Colab</a></p>
+<h3 id="animation">Animation:</h3>
+<pre><code class="language-python">fig, ax = plt.subplots(figsize=(6, 6))
+im = ax.imshow(wave_frame(0), extent=[-10, 10, -10, 10], cmap='RdBu', origin='lower')
+ax.set_title('Single Source Wave Animation')
+
+def animate(t):
+    im.set_array(wave_frame(t))
+    return [im]
+
+ani = animation.FuncAnimation(fig, animate, frames=np.linspace(0, 2, 60), interval=100, blit=True)
+HTML(ani.to_jshtml())
+</code></pre>
+<h2 id="visit-colab">Visit: <a href="https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-#scrollTo=RE23Izc_flOo">Colab</a></h2>
+<h2 id="2-two-sources-interference">2. Two Sources Interference</h2>
+<pre><code class="language-python">sources = [(-3, 0), (3, 0)]
+
+def interference_frame(t):
+    total = np.zeros_like(X)
+    for sx, sy in sources:
+        R = np.sqrt((X - sx)**2 + (Y - sy)**2)
+        total += A * np.sin(k * R - ω * t)
+    return total
+
+# Static Interference Heatmap
+plt.figure(figsize=(6, 6))
+plt.imshow(interference_frame(0), extent=[-10, 10, -10, 10], cmap='RdBu', origin='lower')
+plt.title('Two Sources - Heatmap')
+plt.colorbar(label='Amplitude')
+plt.show()
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-#scrollTo=RE23Izc_flOo">Colab</a></p>
+<h3 id="animation_1">Animation:</h3>
+<pre><code class="language-python">fig, ax = plt.subplots(figsize=(6, 6))
+im = ax.imshow(interference_frame(0), extent=[-10, 10, -10, 10], cmap='RdBu', origin='lower')
+ax.set_title('Two Source Interference Animation')
+
+def animate(t):
+    im.set_array(interference_frame(t))
+    return [im]
+
+ani = animation.FuncAnimation(fig, animate, frames=np.linspace(0, 2, 60), interval=100, blit=True)
+HTML(ani.to_jshtml())
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-#scrollTo=RE23Izc_flOo">Colab</a></p>
 <hr/>
-<h2 id="4-results-and-discussion"><strong>4. Results and Discussion</strong></h2>
-<ul>
-<li><strong>Constructive Interference</strong> occurs where waves reinforce each other, creating bright regions.</li>
-<li><strong>Destructive Interference</strong> occurs where waves cancel, forming dark regions.</li>
-<li>The <strong>polygon shape affects the pattern</strong>, leading to <strong>symmetric and repeating interference zones</strong>.</li>
-</ul>
-<h3 id="different-polygon-cases"><strong>Different Polygon Cases</strong></h3>
+<h2 id="3-polygon-sources-triangle-square-pentagon">3. Polygon Sources (Triangle, Square, Pentagon)</h2>
+<pre><code class="language-python">def generate_polygon_sources(n, radius=5):
+    return [(radius * np.cos(2 * np.pi * i / n),
+             radius * np.sin(2 * np.pi * i / n)) for i in range(n)]
+
+# Choose n = 3, 4, 5 for triangle, square, pentagon
+sources = generate_polygon_sources(n=5)
+
+def polygon_wave(t):
+    total = np.zeros_like(X)
+    for sx, sy in sources:
+        R = np.sqrt((X - sx)**2 + (Y - sy)**2)
+        total += A * np.sin(k * R - ω * t)
+    return total
+
+# Static
+plt.figure(figsize=(6, 6))
+plt.imshow(polygon_wave(0), extent=[-10, 10, -10, 10], cmap='RdBu', origin='lower')
+plt.title('Interference from Pentagon Vertices')
+plt.colorbar(label='Amplitude')
+plt.show()
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-#scrollTo=RE23Izc_flOo">Colab</a></p>
+<h3 id="polygon-animation">Polygon Animation:</h3>
+<pre><code class="language-python">fig, ax = plt.subplots(figsize=(6, 6))
+im = ax.imshow(polygon_wave(0), extent=[-10, 10, -10, 10], cmap='RdBu', origin='lower')
+ax.set_title('Polygon Source Interference Animation')
+
+def animate(t):
+    im.set_array(polygon_wave(t))
+    return [im]
+
+ani = animation.FuncAnimation(fig, animate, frames=np.linspace(0, 2, 60), interval=100, blit=True)
+HTML(ani.to_jshtml())
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-#scrollTo=RE23Izc_flOo">Colab</a></p>
+<hr/>
+<h2 id="optional-3d-visualization">Optional: 3D Visualization</h2>
+<pre><code class="language-python">from mpl_toolkits.mplot3d import Axes3D
+
+fig = plt.figure(figsize=(10, 6))
+ax = fig.add_subplot(111, projection='3d')
+Z = polygon_wave(0)
+ax.plot_surface(X, Y, Z, cmap='viridis', edgecolor='none')
+ax.set_title("3D Interference from Polygon")
+ax.set_zlim(-2, 2)
+plt.show()
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-#scrollTo=RE23Izc_flOo">Colab</a></p>
+<hr/>
+<h2 id="summary">Summary</h2>
 <table>
 <thead>
 <tr>
-<th>Polygon</th>
-<th>Interference Behavior</th>
+<th>Case</th>
+<th>Sources</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Triangle (N=3)</strong></td>
-<td>Large interference zones, simple symmetry.</td>
+<td>1</td>
+<td>Single</td>
+<td>Basic circular wave</td>
 </tr>
 <tr>
-<td><strong>Square (N=4)</strong></td>
-<td>More complex interference fringes.</td>
+<td>2</td>
+<td>Two</td>
+<td>Shows constructive/destructive lines</td>
 </tr>
 <tr>
-<td><strong>Pentagon (N=5)</strong></td>
-<td>Higher symmetry, intricate wave interactions.</td>
+<td>3</td>
+<td>Triangle/Square/Pentagon</td>
+<td>Complex interference lattices</td>
 </tr>
 </tbody>
 </table>
-<h3 id="real-world-applications"><strong>Real-World Applications</strong></h3>
-<ul>
-<li><strong>Optics:</strong> Interference of light waves in <strong>holography</strong> and <strong>diffraction gratings</strong>.</li>
-<li><strong>Acoustics:</strong> Sound wave interference in <strong>concert halls and speaker systems</strong>.</li>
-<li><strong>Fluid Dynamics:</strong> Wave interactions in <strong>oceans and engineering</strong>.</li>
-</ul>
-<hr/>
-<h2 id="5-conclusion"><strong>5. Conclusion</strong></h2>
-<p>This report investigated <strong>wave interference on a water surface</strong> for <strong>multiple sources</strong> arranged in <strong>regular polygons</strong>. The <strong>numerical simulation</strong> confirmed that the <strong>source arrangement</strong> significantly influences <strong>interference patterns</strong>.</p>
-<p>Future work could explore <strong>nonlinear effects, wave damping, and 3D wave interactions</strong>. </p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
