@@ -72,28 +72,6 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#simulating-the-effects-of-the-lorentz-force">Simulating the Effects of the Lorentz Force</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#motivation">Motivation:</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#1-exploration-of-applications">1. Exploration of Applications:</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#2-simulating-particle-motion">2. Simulating Particle Motion:</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#3-parameter-exploration">3. Parameter Exploration:</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#4-visualization">4. Visualization:</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#python-code-implementation">Python Code Implementation:</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#5-discussion">5. Discussion:</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#6-suggestions-for-future-extensions">6. Suggestions for Future Extensions:</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion:</a>
-</li>
 </ul>
 </li>
 </ul>
@@ -194,103 +172,253 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
-<h3 id="simulating-the-effects-of-the-lorentz-force"><strong>Simulating the Effects of the Lorentz Force</strong></h3>
-<h4 id="motivation">Motivation:</h4>
-<p>The Lorentz force, described by the equation <strong>F = q(E + v × B)</strong>, governs the motion of charged particles in the presence of electric (E) and magnetic (B) fields. This force is fundamental in numerous areas of physics, including particle accelerators, mass spectrometers, and plasma confinement. By simulating particle motion under the influence of these fields, we can visualize the complex trajectories and gain insight into practical applications in areas such as cyclotrons and magnetic confinement systems.</p>
-<h4 id="1-exploration-of-applications">1. <strong>Exploration of Applications:</strong></h4>
-<p>The Lorentz force is central to systems where charged particles interact with electromagnetic fields. Key applications include:
-- <strong>Particle Accelerators:</strong> In cyclotrons or synchrotrons, charged particles are accelerated by electric fields and guided by magnetic fields.
-- <strong>Mass Spectrometers:</strong> Charged particles are deflected by magnetic fields, allowing scientists to measure their mass-to-charge ratio.
-- <strong>Plasma Confinement:</strong> Magnetic fields are used to confine plasma in devices like Tokamaks for nuclear fusion research.</p>
-<p>Electric fields <span class="arithmatex">\((E)\)</span> affect particles by accelerating them in the direction of the field, while magnetic fields <span class="arithmatex">\((B)\)</span> exert a force perpendicular to both the velocity of the particle and the magnetic field, causing circular or spiral motion. The combination of these fields controls the particle's motion in advanced technologies.</p>
-<h4 id="2-simulating-particle-motion">2. <strong>Simulating Particle Motion:</strong></h4>
-<p>To simulate the motion of a charged particle, we solve the Lorentz force equation using numerical methods. We will simulate the particle’s motion under different field configurations:
-- <strong>Uniform Magnetic Field:</strong> The particle moves in a circular or helical trajectory depending on the initial velocity components.
-- <strong>Combined Electric and Magnetic Fields:</strong> The electric and magnetic forces combine to produce more complex trajectories, like drift or spiral motion.
-- <strong>Crossed Electric and Magnetic Fields:</strong> A specific case where the electric and magnetic fields are perpendicular to each other, leading to interesting particle behavior.</p>
-<h4 id="3-parameter-exploration">3. <strong>Parameter Exploration:</strong></h4>
-<p>In the simulation, we will vary the following parameters:
-- <strong>Field Strengths (E, B):</strong> The intensity of the electric and magnetic fields.
-- <strong>Initial Particle Velocity (v):</strong> The starting velocity of the particle, including both magnitude and direction.
-- <strong>Charge and Mass of the Particle (q, m):</strong> The properties of the particle will influence the strength of the Lorentz force.</p>
-<p>These parameters will be varied to observe their impact on the trajectory of the particle.</p>
-<h4 id="4-visualization">4. <strong>Visualization:</strong></h4>
-<p>We will generate 2D and 3D visualizations of the particle's motion. Key phenomena to be highlighted include:
-- <strong>Larmor Radius:</strong> The radius of the circular path the particle follows in a uniform magnetic field.
-- <strong>Drift Velocity:</strong> The velocity of the particle when both electric and magnetic fields are present.</p>
-<h3 id="python-code-implementation">Python Code Implementation:</h3>
-<p>We use numerical integration (Euler or Runge-Kutta method) to solve the equation of motion for the charged particle. Below is an implementation using Python with the <strong>NumPy</strong> and <strong>Matplotlib</strong> libraries for calculations and visualizations.</p>
+<h1 id="electromagnetism-lorentz-force-trajectories-of-charged-particles">Electromagnetism: Lorentz Force &amp; Trajectories of Charged Particles</h1>
+<h2 id="motivation">Motivation</h2>
+<p>Understanding how charged particles move in electromagnetic fields is essential for:</p>
+<ul>
+<li>Plasma physics</li>
+<li>Particle accelerators</li>
+<li>Magnetic confinement in fusion</li>
+<li>Mass spectrometry</li>
+<li>Astrophysics and space weather</li>
+</ul>
+<p>We focus on the <strong>Lorentz Force</strong>, which governs the motion of a charged particle in electric and magnetic fields. This force alters the trajectory, causing particles to spiral, drift, or move in circles depending on initial conditions.</p>
+<hr/>
+<h2 id="lorentz-force-equation">Lorentz Force Equation</h2>
+<p>The <strong>Lorentz Force</strong> on a particle of charge <span class="arithmatex">\(q\)</span> is given by:</p>
+<div class="arithmatex">\[
+\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})
+\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(\vec{E}\)</span>: electric field</li>
+<li><span class="arithmatex">\(\vec{B}\)</span>: magnetic field</li>
+<li><span class="arithmatex">\(\vec{v}\)</span>: velocity of the particle</li>
+</ul>
+<p>For now, we will focus on <strong>magnetic field only</strong>:</p>
+<div class="arithmatex">\[
+\vec{F} = q (\vec{v} \times \vec{B})
+\]</div>
+<p>Using Newton’s Second Law:</p>
+<div class="arithmatex">\[
+\vec{a} = \frac{d\vec{v}}{dt} = \frac{\vec{F}}{m} = \frac{q}{m} (\vec{v} \times \vec{B})
+\]</div>
+<p>We solve this system numerically using time-stepping.</p>
+<hr/>
+<h2 id="physical-intuition">Physical Intuition</h2>
+<ul>
+<li>If <span class="arithmatex">\(\vec{v} \perp \vec{B}\)</span>: the particle undergoes <strong>circular motion</strong></li>
+<li>If <span class="arithmatex">\(\vec{v}\)</span> has a component parallel to <span class="arithmatex">\(\vec{B}\)</span>: <strong>spiral motion</strong></li>
+<li>If <span class="arithmatex">\(\vec{E} \neq 0\)</span>: can result in <strong>drift motion</strong></li>
+</ul>
+<hr/>
+<h2 id="simulation-setup">Simulation Setup</h2>
+<p><strong>Assumptions:</strong></p>
+<ul>
+<li>Charge <span class="arithmatex">\(q = 1 \, \text{C}\)</span></li>
+<li>Mass <span class="arithmatex">\(m = 1 \, \text{g} = 0.001 \, \text{kg}\)</span></li>
+<li><span class="arithmatex">\(\vec{B} = (0, 0, 1) \, \text{T}\)</span> (magnetic field along z-axis)</li>
+</ul>
+<hr/>
+<h2 id="python-code-for-google-colab">Python Code (for Google Colab)</h2>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # Constants
-q = 1.6e-19  # Charge of the particle in Coulombs
-m = 9.11e-31  # Mass of the particle in kg
-E = np.array([0, 0, 0])  # Electric field (zero for this example)
-B = np.array([0, 0, 1])  # Magnetic field along the z-axis
-v_initial = np.array([1e6, 0, 0])  # Initial velocity of the particle (m/s)
+q = 1     # Charge (C)
+m = 0.001 # Mass (kg)
+dt = 0.001
+steps = 500
 
-# Time setup
-t_max = 1e-6  # Maximum time
-dt = 1e-9  # Time step
-steps = int(t_max / dt)  # Number of steps
+# Magnetic Field
+B = np.array([0, 0, 1])
 
-# Arrays to store position and velocity
-positions = np.zeros((steps, 3))
-velocities = np.zeros((steps, 3))
+# Initial Conditions
+def simulate_trajectory(v0, r0, damping=0.0):
+    r = np.zeros((steps, 3))
+    v = v0.copy()
+    r[0] = r0.copy()
 
-# Initial conditions
-positions[0] = np.array([0, 0, 0])
-velocities[0] = v_initial
+    for i in range(1, steps):
+        F = q * np.cross(v, B)
+        a = F / m
+        v += a * dt
+        v *= (1 - damping)  # simple damping
+        r[i] = r[i-1] + v * dt
 
-# Simulation loop
-for i in range(1, steps):
-    # Lorentz force F = q(E + v x B)
-    v = velocities[i-1]
-    F = q * (E + np.cross(v, B))
+    return r
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-#scrollTo=f-tm-PLyyMPQ">Colab</a></p>
+<hr/>
+<h2 id="visualizing-trajectories">Visualizing Trajectories</h2>
+<h3 id="1-circular-motion-vecv-perp-vecb">1. Circular Motion (<span class="arithmatex">\(\vec{v} \perp \vec{B}\)</span>)</h3>
+<pre><code class="language-python">v0 = np.array([1.0, 0.0, 0.0])
+r0 = np.array([0.0, 0.0, 0.0])
 
-    # Update velocity and position using Euler's method
-    velocities[i] = v + F * dt / m
-    positions[i] = positions[i-1] + velocities[i] * dt
+trajectory = simulate_trajectory(v0, r0)
 
-# Plot the results in 3D
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-ax.plot(positions[:, 0], positions[:, 1], positions[:, 2])
-
-# Label axes and show the plot
-ax.set_xlabel('X position (m)')
-ax.set_ylabel('Y position (m)')
-ax.set_zlabel('Z position (m)')
-ax.set_title('Particle Trajectory under Lorentz Force')
-
+ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2])
+ax.set_title("Circular Motion: v ⊥ B")
 plt.show()
 </code></pre>
-<p><a href="https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-">Colab</a></p>
-<p><img alt="Example Image" src="https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/4%20Electromagnetism/Unknown-7.png?raw=true"/></p>
-<h3 id="5-discussion">5. <strong>Discussion:</strong></h3>
-<p>This simulation provides a clear visualization of how a charged particle behaves under different field configurations. The motion can be circular, helical, or drift depending on the presence of the electric and magnetic fields.</p>
+<p>Visit: <a href="https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-#scrollTo=f-tm-PLyyMPQ">Colab</a></p>
+<hr/>
+<h3 id="2-spiral-motion-vecv-has-both-perp-and-parallel-to-vecb">2. Spiral Motion (<span class="arithmatex">\(\vec{v}\)</span> has both <span class="arithmatex">\(\perp\)</span> and <span class="arithmatex">\(\parallel\)</span> to <span class="arithmatex">\(\vec{B}\)</span>)</h3>
+<pre><code class="language-python">v0 = np.array([1.0, 0.0, 0.5])
+trajectory = simulate_trajectory(v0, r0)
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2], color='green')
+ax.set_title("Spiral Motion: v ⊥ and ‖ B")
+plt.show()
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-#scrollTo=f-tm-PLyyMPQ">Colab</a></p>
+<hr/>
+<h3 id="3-drift-motion-add-electric-field-optional">3. Drift Motion (add Electric Field, optional)</h3>
+<pre><code class="language-python">E = np.array([0.0, 1.0, 0.0])  # Electric field
+
+def simulate_with_E(v0, r0):
+    r = np.zeros((steps, 3))
+    v = v0.copy()
+    r[0] = r0.copy()
+
+    for i in range(1, steps):
+        F = q * (E + np.cross(v, B))
+        a = F / m
+        v += a * dt
+        r[i] = r[i-1] + v * dt
+
+    return r
+
+v0 = np.array([1.0, 0.0, 0.0])
+trajectory = simulate_with_E(v0, r0)
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2], color='orange')
+ax.set_title("Drift Motion: E + B")
+plt.show()
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-#scrollTo=f-tm-PLyyMPQ">Colab</a></p>
+<hr/>
+<h2 id="animation-code-spiral-case">Animation Code (Spiral Case)</h2>
+<pre><code class="language-python">from matplotlib import animation
+from IPython.display import HTML
+
+def animate_trajectory(traj):
+    fig = plt.figure(figsize=(6, 5))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.set_xlim(np.min(traj[:,0]), np.max(traj[:,0]))
+    ax.set_ylim(np.min(traj[:,1]), np.max(traj[:,1]))
+    ax.set_zlim(np.min(traj[:,2]), np.max(traj[:,2]))
+    line, = ax.plot([], [], [], lw=2)
+
+    def init():
+        line.set_data([], [])
+        line.set_3d_properties([])
+        return line,
+
+    def update(frame):
+        line.set_data(traj[:frame, 0], traj[:frame, 1])
+        line.set_3d_properties(traj[:frame, 2])
+        return line,
+
+    ani = animation.FuncAnimation(fig, update, frames=len(traj), init_func=init,
+                                  interval=40, blit=True)
+    return ani
+
+spiral = simulate_trajectory(np.array([1.0, 0.0, 0.5]), np.array([0.0, 0.0, 0.0]))
+ani = animate_trajectory(spiral)
+HTML(ani.to_jshtml())
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-#scrollTo=f-tm-PLyyMPQ">Colab</a></p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.animation import FuncAnimation
+from IPython.display import HTML
+
+# Physical constants
+q = 1.0       # charge in C
+m = 0.001     # mass in kg
+B = np.array([0, 0, 1])     # magnetic field in z direction (T)
+E = np.array([0, 0, 0])     # electric field (optional)
+v0 = np.array([1., 1., 0.5])  # initial velocity in m/s - Changed to float
+r0 = np.array([0., 0., 0.])    # initial position - Changed to float
+
+# Time settings
+dt = 0.001 # Reduced time step
+steps = 1000 # Reduced number of steps
+
+# Arrays to store trajectory
+positions = np.zeros((steps, 3))
+velocities = np.zeros((steps, 3))
+positions[0] = r0
+velocities[0] = v0
+
+# Simulation (Euler method)
+for i in range(1, steps):
+    v = velocities[i-1]
+    a = (q / m) * (E + np.cross(v, B))
+    velocities[i] = v + a * dt
+    positions[i] = positions[i-1] + velocities[i] * dt
+
+# --- 3D Animation ---
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111, projection='3d')
+# Adjust limits based on trajectory data
+ax.set_xlim(np.min(positions[:,0]), np.max(positions[:,0]))
+ax.set_ylim(np.min(positions[:,1]), np.max(positions[:,1]))
+ax.set_zlim(np.min(positions[:,2]), np.max(positions[:,2]))
+
+ax.set_title("Lorentz Force: Particle Trajectory")
+line, = ax.plot([], [], [], lw=2)
+point, = ax.plot([], [], [], 'ro')
+
+def init():
+    line.set_data([], [])
+    line.set_3d_properties([])
+    point.set_data([], [])
+    point.set_3d_properties([])
+    return line, point
+
+def update(frame):
+    line.set_data(positions[:frame, 0], positions[:frame, 1])
+    line.set_3d_properties(positions[:frame, 2])
+    # Pass coordinates as sequences for the point
+    point.set_data([positions[frame, 0]], [positions[frame, 1]])
+    point.set_3d_properties([positions[frame, 2]])
+    return line, point
+
+ani = FuncAnimation(fig, update, frames=range(0, steps, 10), init_func=init,
+                    blit=True, interval=30)
+
+HTML(ani.to_jshtml())  # For Colab inline display
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-#scrollTo=f-tm-PLyyMPQ">Colab</a></p>
+<hr/>
+<h2 id="insights">Insights</h2>
 <ul>
-<li>
-<p><strong>In a uniform magnetic field</strong>, the particle traces a circular path with a radius determined by the <strong>Larmor radius</strong>, which is given by the equation:
-  <span class="arithmatex">\(<span class="arithmatex">\(r_L = \frac{mv_{\perp}}{qB}\)</span>\)</span>
-  where <span class="arithmatex">\(v_{\perp}\)</span> is the component of the velocity perpendicular to the magnetic field.</p>
-</li>
-<li>
-<p><strong>In combined fields</strong>, the particle may exhibit complex motion such as drift velocity, where the electric field exerts a force in the direction of the field, while the magnetic field causes perpendicular motion.</p>
-</li>
+<li>The Lorentz force is always perpendicular to velocity ⇒ no work done ⇒ speed constant.</li>
+<li>Radius of circular motion:</li>
 </ul>
-<p>This simulation mimics the behavior observed in real-world devices like <strong>cyclotrons</strong> and <strong>mass spectrometers</strong>, where charged particles are manipulated by magnetic fields for acceleration and detection.</p>
-<h3 id="6-suggestions-for-future-extensions">6. <strong>Suggestions for Future Extensions:</strong></h3>
+<div class="arithmatex">\[
+r = \frac{mv}{qB}
+\]</div>
 <ul>
-<li><strong>Non-Uniform Fields:</strong> Extend the simulation to include non-uniform electric and magnetic fields (e.g., magnetic gradients in a magnetic trap).</li>
-<li><strong>Relativistic Effects:</strong> For very high velocities, include relativistic corrections to the particle’s mass and velocity.</li>
-<li><strong>Particle Collisions:</strong> Add more complexity by simulating interactions between multiple particles.</li>
+<li>Period of rotation:</li>
+</ul>
+<div class="arithmatex">\[
+T = \frac{2\pi m}{qB}
+\]</div>
+<ul>
+<li>Electric fields induce drift depending on E ⊥ B direction.</li>
 </ul>
 <hr/>
-<h3 id="conclusion">Conclusion:</h3>
-<p>Simulating the Lorentz force provides valuable insights into the motion of charged particles in electromagnetic fields, essential for understanding the behavior of systems like particle accelerators and mass spectrometers. The results from this simulation offer a practical and visual understanding of how particles are controlled in these systems, with further potential to extend this model to more complex scenarios.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
