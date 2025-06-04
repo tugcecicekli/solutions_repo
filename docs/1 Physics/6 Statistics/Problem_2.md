@@ -253,6 +253,8 @@ def convergence_analysis_buffon(N_max=10000, step=500, L=1.0, d=2.0):
 
 convergence_analysis_buffon()
 ```
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/6%20Statistics/Unknown-627.png?raw=true)
+
 Visit: [Colab](https://colab.research.google.com/drive/12BYlXtYpTRca7vZ0PzWge0qjHnQXr0b5#scrollTo=Dc_8nvQYHBdE)
 
 ---
