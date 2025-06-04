@@ -63,6 +63,7 @@ for n in [100, 1000, 10000, 100000]:
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/6%20Statistics/Unknown-621.png?raw=true)
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/6%20Statistics/Unknown-622.png?raw=true)
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/6%20Statistics/Unknown-623.png?raw=true)
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/6%20Statistics/Unknown-624.png?raw=true)
 
 Visit: [Colab](https://colab.research.google.com/drive/12BYlXtYpTRca7vZ0PzWge0qjHnQXr0b5#scrollTo=Dc_8nvQYHBdE)
 
