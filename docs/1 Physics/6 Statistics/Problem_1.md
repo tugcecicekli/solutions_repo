@@ -118,6 +118,7 @@ Visit: [Colab](https://colab.research.google.com/drive/1o0TQMxKll0IjxXCilOuSTzD5
 
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/6%20Statistics/Unknown-611.png?raw=true)
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/6%20Statistics/Unknown-612.png?raw=true)
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/6%20Statistics/Unknown-613.png?raw=true)
 
 ---
 
