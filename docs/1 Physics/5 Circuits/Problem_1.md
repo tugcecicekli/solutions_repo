@@ -255,6 +255,8 @@ print(f"Animated Result: {req:.2f} Ω")
 Visit:[Colab](https://colab.research.google.com/drive/1S-2XQLto7CzYvL6rtMLSLUcyY9CDzIwc#scrollTo=eCMQmkc6Av15
 )
 
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-5666.png?raw=true)
+
 ```python
 # Create animation
 fig = animation_frames[0]
