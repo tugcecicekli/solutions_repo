@@ -31,7 +31,7 @@ $$
 
 ---
 
-## 3. Steady-State and Resistance
+## 2. Steady-State and Resistance
 
 In steady-state (DC analysis):
 
@@ -48,7 +48,7 @@ $$
 
 ---
 
-## 4. Graph-Theoretic Circuit Model
+## 3. Graph-Theoretic Circuit Model
 
 | Concept    | Description                           |
 | ---------- | ------------------------------------- |
@@ -209,7 +209,7 @@ Visit:[Colab](https://colab.research.google.com/drive/1S-2XQLto7CzYvL6rtMLSLUcyY
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-55.png?raw=true)
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-555.png?raw=true)
 
-### Animation 
+### 4.Animation 
 
 ```python
 from matplotlib import animation
@@ -274,7 +274,7 @@ Visit:[Colab](https://colab.research.google.com/drive/1S-2XQLto7CzYvL6rtMLSLUcyY
 
 
 ---
-## 7. Example Interpretation
+## 5. Example Interpretation
 
 This circuit:
 
@@ -291,7 +291,7 @@ Reduces to:
 
 ---
 
-## 8. Applications
+## 6. Applications
 
 * Circuit simulation software
 * Hardware simplification
