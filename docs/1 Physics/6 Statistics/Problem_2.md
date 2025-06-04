@@ -96,6 +96,8 @@ def convergence_analysis_circle(max_points=100000, step=1000):
 
 convergence_analysis_circle()
 ```
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/6%20Statistics/Unknown-625.png?raw=true)
+
 Visit: [Colab](https://colab.research.google.com/drive/12BYlXtYpTRca7vZ0PzWge0qjHnQXr0b5#scrollTo=Dc_8nvQYHBdE)
 
 ### 4. Animation
