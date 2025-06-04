@@ -88,17 +88,17 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#rlc-circuits">RLC Circuits</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#3-steady-state-and-resistance">3. Steady-State and Resistance</a>
+<li class="toctree-l3"><a class="reference internal" href="#2-steady-state-and-resistance">2. Steady-State and Resistance</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#4-graph-theoretic-circuit-model">4. Graph-Theoretic Circuit Model</a>
+<li class="toctree-l3"><a class="reference internal" href="#3-graph-theoretic-circuit-model">3. Graph-Theoretic Circuit Model</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#animation">Animation</a>
+<li class="toctree-l4"><a class="reference internal" href="#4animation">4.Animation</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#7-example-interpretation">7. Example Interpretation</a>
+<li class="toctree-l3"><a class="reference internal" href="#5-example-interpretation">5. Example Interpretation</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#8-applications">8. Applications</a>
+<li class="toctree-l3"><a class="reference internal" href="#6-applications">6. Applications</a>
 </li>
 </ul>
 </li>
@@ -214,7 +214,7 @@ V(t) = i(t)R + L\frac{di(t)}{dt} + \frac{1}{C} \int i(t)\,dt
 L \frac{d^2q(t)}{dt^2} + R \frac{dq(t)}{dt} + \frac{1}{C} q(t) = V(t)
 \]</div>
 <hr/>
-<h2 id="3-steady-state-and-resistance">3. Steady-State and Resistance</h2>
+<h2 id="2-steady-state-and-resistance">2. Steady-State and Resistance</h2>
 <p>In steady-state (DC analysis):</p>
 <ul>
 <li><span class="arithmatex">\(\frac{dq}{dt} = 0\)</span>, <span class="arithmatex">\(\frac{d^2q}{dt^2} = 0\)</span></li>
@@ -227,7 +227,7 @@ L \frac{d^2q(t)}{dt^2} + R \frac{dq(t)}{dt} + \frac{1}{C} q(t) = V(t)
 V = IR \quad \Rightarrow \quad R_{\text{eq}} = \frac{V}{I}
 \]</div>
 <hr/>
-<h2 id="4-graph-theoretic-circuit-model">4. Graph-Theoretic Circuit Model</h2>
+<h2 id="3-graph-theoretic-circuit-model">3. Graph-Theoretic Circuit Model</h2>
 <table>
 <thead>
 <tr>
@@ -386,7 +386,7 @@ print(f"Diamond Example → Equivalent Resistance: {req4:.2f} Ω")
 <p>Visit:<a href="https://colab.research.google.com/drive/1S-2XQLto7CzYvL6rtMLSLUcyY9CDzIwc#scrollTo=eCMQmkc6Av15">Colab</a></p>
 <p><img alt="Example Image" src="https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-55.png?raw=true"/>
 <img alt="Example Image" src="https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-555.png?raw=true"/></p>
-<h3 id="animation">Animation</h3>
+<h3 id="4animation">4.Animation</h3>
 <pre><code class="language-python">from matplotlib import animation
 from IPython.display import HTML
 
@@ -440,7 +440,7 @@ HTML(ani.to_jshtml())
 </code></pre>
 <p>Visit:<a href="https://colab.research.google.com/drive/1S-2XQLto7CzYvL6rtMLSLUcyY9CDzIwc#scrollTo=eCMQmkc6Av15">Colab</a></p>
 <hr/>
-<h2 id="7-example-interpretation">7. Example Interpretation</h2>
+<h2 id="5-example-interpretation">5. Example Interpretation</h2>
 <p>This circuit:</p>
 <pre><code>START — 5Ω — A — 10Ω — END
        \________________/
@@ -452,7 +452,7 @@ HTML(ani.to_jshtml())
 <li>In parallel with 15Ω → final R_eq = 7.5Ω</li>
 </ul>
 <hr/>
-<h2 id="8-applications">8. Applications</h2>
+<h2 id="6-applications">6. Applications</h2>
 <ul>
 <li>Circuit simulation software</li>
 <li>Hardware simplification</li>
