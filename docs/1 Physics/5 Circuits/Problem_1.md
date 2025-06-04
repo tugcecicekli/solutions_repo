@@ -273,50 +273,6 @@ Visit:[Colab](https://colab.research.google.com/drive/1S-2XQLto7CzYvL6rtMLSLUcyY
 )
 
 ---
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-def simulate_clt(population_generator, pop_params, sample_sizes=[5, 10, 30, 50], n_simulations=1000, title=''):
-    plt.figure(figsize=(18, 10))
-    for i, n in enumerate(sample_sizes):
-        sample_means = []
-        for _ in range(n_simulations):
-            population = population_generator(**pop_params)
-            sample = np.random.choice(population, size=n, replace=True)
-            sample_means.append(np.mean(sample))
-        plt.subplot(2, len(sample_sizes)//2, i+1)
-        sns.histplot(sample_means, kde=True, bins=30, color='skyblue')
-        plt.title(f'Sample size = {n}')
-        plt.xlabel('Sample Mean')
-    plt.suptitle(f'Sampling Distribution of Sample Mean ({title})', fontsize=16)
-    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-    plt.show()
-
-# Population generators
-def uniform_population(size=10000, low=0, high=10):
-    return np.random.uniform(low, high, size)
-
-def exponential_population(size=10000, scale=1.0):
-    return np.random.exponential(scale, size)
-
-def binomial_population(size=10000, n=10, p=0.5):
-    return np.random.binomial(n=n, p=p, size=size)
-
-# Run simulations
-simulate_clt(uniform_population, {'low': 0, 'high': 10}, title='Uniform(0,10)')
-simulate_clt(exponential_population, {'scale': 1.0}, title='Exponential(scale=1)')
-simulate_clt(binomial_population, {'n': 10, 'p': 0.5}, title='Binomial(n=10, p=0.5)')
-```
-![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-571.png?raw=true)
-![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-572.png?raw=true)
-![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-573.png?raw=true)
-
-Visit:[Colab](https://colab.research.google.com/drive/1S-2XQLto7CzYvL6rtMLSLUcyY9CDzIwc#scrollTo=eCMQmkc6Av15
-)
-
----
 ## 5. Example Interpretation
 
 This circuit:
