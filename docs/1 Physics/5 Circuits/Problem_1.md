@@ -170,6 +170,9 @@ print(f"Parallel Example → Equivalent Resistance: {req2:.2f} Ω")
 Visit:[Colab](https://colab.research.google.com/drive/1S-2XQLto7CzYvL6rtMLSLUcyY9CDzIwc#scrollTo=eCMQmkc6Av15
 )
 
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-53.png?raw=true)
+
+
 ```python
 # Nested: two series resistors in parallel with one resistor
 # START — 5Ω — A — 5Ω — END
