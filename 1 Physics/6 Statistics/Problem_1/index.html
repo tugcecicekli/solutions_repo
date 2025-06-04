@@ -84,6 +84,50 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-background">1. Theoretical Background</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-the-central-limit-theorem">What is the Central Limit Theorem?</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-key-formulas">2. Key Formulas</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-understanding-through-simulations">3. Understanding Through Simulations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-python-implementation">4. Python Implementation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#population-generators">Population Generators</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#function-to-plot-sampling-distribution">Function to Plot Sampling Distribution</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#generate-sampling-distributions">Generate Sampling Distributions</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#5-animation-how-the-sample-mean-converges">5. Animation: How the Sample Mean Converges</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#6-in-depth-discussion">6. In-Depth Discussion</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#influence-of-distribution-shape">Influence of Distribution Shape</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#influence-of-variance">Influence of Variance</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#7-real-world-applications-of-the-clt">7. Real-World Applications of the CLT</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#manufacturing">Manufacturing</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#finance">Finance</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#medicine-biology">Medicine &amp; Biology</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#polling-surveys">Polling &amp; Surveys</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#8-summary">8. Summary</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -172,6 +216,218 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h2 id="1-theoretical-background">1. Theoretical Background</h2>
+<h3 id="what-is-the-central-limit-theorem">What is the Central Limit Theorem?</h3>
+<blockquote>
+<p>The <strong>Central Limit Theorem (CLT)</strong> is a fundamental result in statistics that explains why the normal distribution arises so frequently in practice. It states:</p>
+<blockquote>
+<p><em>Given a population with any shape distribution (with finite mean μ and variance σ²), the distribution of the sample means (𝑋̄) of sufficiently large random samples will approach a normal distribution as the sample size (n) increases.</em></p>
+</blockquote>
+</blockquote>
+<p>This happens <strong>regardless of the shape of the original distribution</strong> — it could be skewed, uniform, or binomial — and yet the <strong>distribution of the sample means becomes approximately normal</strong> for large enough sample sizes.</p>
+<hr/>
+<h2 id="2-key-formulas">2. Key Formulas</h2>
+<p>Let <span class="arithmatex">\(X_1, X_2, \dots, X_n\)</span> be independent and identically distributed (i.i.d.) random variables from some population with:</p>
+<ul>
+<li>Mean <span class="arithmatex">\(\mu = E[X_i]\)</span></li>
+<li>Variance <span class="arithmatex">\(\sigma^2 = Var(X_i)\)</span></li>
+</ul>
+<p>Then, the <strong>sample mean</strong> is:</p>
+<div class="arithmatex">\[
+\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i
+\]</div>
+<p>The <strong>expected value and variance</strong> of the sample mean are:</p>
+<ul>
+<li><span class="arithmatex">\(E[\bar{X}] = \mu\)</span></li>
+<li><span class="arithmatex">\(Var(\bar{X}) = \frac{\sigma^2}{n}\)</span></li>
+</ul>
+<p>According to the CLT:</p>
+<div class="arithmatex">\[
+\frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \xrightarrow{d} \mathcal{N}(0, 1) \quad \text{as } n \to \infty
+\]</div>
+<hr/>
+<h2 id="3-understanding-through-simulations">3. Understanding Through Simulations</h2>
+<p>We will simulate the CLT using three different population distributions:</p>
+<ol>
+<li><strong>Uniform Distribution</strong></li>
+<li><strong>Exponential Distribution</strong></li>
+<li><strong>Binomial Distribution</strong></li>
+</ol>
+<p>For each distribution:</p>
+<ul>
+<li>We generate a large population.</li>
+<li>Draw multiple random samples.</li>
+<li>Calculate the sample mean for different sample sizes.</li>
+<li>Plot the <strong>sampling distribution</strong> of the sample mean.</li>
+</ul>
+<hr/>
+<h2 id="4-python-implementation">4. Python Implementation</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from matplotlib.animation import FuncAnimation
+from IPython.display import HTML
+
+sns.set(style="whitegrid")
+
+# Settings
+population_sample_size = 100000
+num_samples = 1000
+sample_sizes = [5, 10, 30, 50]
+</code></pre>
+<hr/>
+<h3 id="population-generators">Population Generators</h3>
+<pre><code class="language-python"># Define distributions
+population_distributions = {
+    'Uniform(0,1)': lambda size: np.random.uniform(0, 1, size),
+    'Exponential(λ=1)': lambda size: np.random.exponential(scale=1.0, size=size),
+    'Binomial(n=10, p=0.5)': lambda size: np.random.binomial(n=10, p=0.5, size=size)
+}
+</code></pre>
+<hr/>
+<h3 id="function-to-plot-sampling-distribution">Function to Plot Sampling Distribution</h3>
+<pre><code class="language-python">def plot_sampling_distribution(dist_name, generator):
+    population = generator(population_sample_size)
+
+    fig, axes = plt.subplots(1, len(sample_sizes), figsize=(20, 4))
+    fig.suptitle(f'Sampling Distribution of Sample Mean ({dist_name})', fontsize=16)
+
+    for idx, n in enumerate(sample_sizes):
+        sample_means = [np.mean(generator(n)) for _ in range(num_samples)]
+        sns.histplot(sample_means, kde=True, bins=30, ax=axes[idx], color="skyblue")
+        axes[idx].set_title(f'Sample size n = {n}')
+        axes[idx].set_xlabel('Sample Mean')
+        axes[idx].set_ylabel('Frequency')
+
+    plt.tight_layout()
+    plt.show()
+</code></pre>
+<hr/>
+<h3 id="generate-sampling-distributions">Generate Sampling Distributions</h3>
+<pre><code class="language-python">for name, gen in population_distributions.items():
+    plot_sampling_distribution(name, gen)
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1o0TQMxKll0IjxXCilOuSTzD5PICTyxrn#scrollTo=_Oklt7YVDRqV">Colab</a></p>
+<hr/>
+<h2 id="5-animation-how-the-sample-mean-converges">5. Animation: How the Sample Mean Converges</h2>
+<p>We animate the build-up of sample means from the <strong>Exponential distribution</strong>.</p>
+<pre><code class="language-python"># Animation for Exponential Distribution
+sample_means = []
+
+fig, ax = plt.subplots(figsize=(6, 4))
+
+def animate(i):
+    ax.clear()
+    sample = np.random.exponential(scale=1.0, size=30)
+    sample_means.append(np.mean(sample))
+    sns.histplot(sample_means, kde=True, bins=30, ax=ax, color="orange")
+    ax.set_xlim(0, 3)
+    ax.set_ylim(0, 150)
+    ax.set_title(f'Step {i+1}: CLT in Action')
+
+ani = FuncAnimation(fig, animate, frames=100, repeat=False)
+plt.close()
+HTML(ani.to_jshtml())
+</code></pre>
+<p>Visit: <a href="https://colab.research.google.com/drive/1o0TQMxKll0IjxXCilOuSTzD5PICTyxrn#scrollTo=_Oklt7YVDRqV">Colab</a></p>
+<hr/>
+<h2 id="6-in-depth-discussion">6. In-Depth Discussion</h2>
+<h3 id="influence-of-distribution-shape">Influence of Distribution Shape</h3>
+<table>
+<thead>
+<tr>
+<th>Distribution</th>
+<th>Shape</th>
+<th>CLT Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Uniform(0,1)</td>
+<td>Flat</td>
+<td>Fast convergence</td>
+</tr>
+<tr>
+<td>Exponential(λ=1)</td>
+<td>Skewed right</td>
+<td>Slower convergence</td>
+</tr>
+<tr>
+<td>Binomial(10,0.5)</td>
+<td>Discrete</td>
+<td>Moderate convergence, quickly normal</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The <strong>more skewed</strong> or <strong>discrete</strong> the population, the <strong>larger the sample size</strong> needed for normality.</li>
+<li>All converge eventually, confirming the <strong>universality of the CLT</strong>.</li>
+</ul>
+<h3 id="influence-of-variance">Influence of Variance</h3>
+<p>The spread (standard deviation) of the sample means depends on:</p>
+<div class="arithmatex">\[
+\text{Standard deviation of the mean} = \frac{\sigma}{\sqrt{n}}
+\]</div>
+<p>→ <strong>Larger sample sizes yield tighter, less variable distributions</strong>.</p>
+<hr/>
+<h2 id="7-real-world-applications-of-the-clt">7. Real-World Applications of the CLT</h2>
+<h3 id="manufacturing">Manufacturing</h3>
+<ul>
+<li><strong>Quality control</strong>: CLT allows estimating the defect rate from a sample.</li>
+<li>Example: Testing 50 widgets out of 1000 to assess quality.</li>
+</ul>
+<h3 id="finance">Finance</h3>
+<ul>
+<li>Predicting <strong>expected return</strong> on portfolios over time.</li>
+<li>Modeling <strong>risk</strong> by sampling past performance.</li>
+</ul>
+<h3 id="medicine-biology">Medicine &amp; Biology</h3>
+<ul>
+<li>Evaluating average effects of drugs on patient groups.</li>
+<li>Using <strong>sample averages</strong> in clinical trials to infer <strong>population behavior</strong>.</li>
+</ul>
+<h3 id="polling-surveys">Polling &amp; Surveys</h3>
+<ul>
+<li>Estimating <strong>population opinion</strong> from a representative sample.</li>
+<li>Used in <strong>election forecasting</strong> and public opinion research.</li>
+</ul>
+<hr/>
+<h2 id="8-summary">8. Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Central Limit Theorem</td>
+<td>Sample means approximate normal distribution as sample size increases</td>
+</tr>
+<tr>
+<td>Sample Mean <span class="arithmatex">\(\bar{X}\)</span></td>
+<td><span class="arithmatex">\(\bar{X} = \frac{1}{n} \sum X_i\)</span></td>
+</tr>
+<tr>
+<td>Variance of Sample Mean</td>
+<td><span class="arithmatex">\(\frac{\sigma^2}{n}\)</span></td>
+</tr>
+<tr>
+<td>Simulation Distributions</td>
+<td>Uniform, Exponential, Binomial</td>
+</tr>
+<tr>
+<td>Visualization</td>
+<td>Histograms, KDEs, Animation</td>
+</tr>
+<tr>
+<td>Key Insight</td>
+<td>Distribution shape and sample size influence convergence to normality</td>
+</tr>
+</tbody>
+</table>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
