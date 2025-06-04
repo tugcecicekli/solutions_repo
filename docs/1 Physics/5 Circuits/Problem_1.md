@@ -207,6 +207,7 @@ Visit:[Colab](https://colab.research.google.com/drive/1S-2XQLto7CzYvL6rtMLSLUcyY
 )
 
 ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-55.png?raw=true)
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-555.png?raw=true)
 
 ### Animation 
 
