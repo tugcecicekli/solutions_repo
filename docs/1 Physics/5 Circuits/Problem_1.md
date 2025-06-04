@@ -1,6 +1,24 @@
 # Problem 1
-## 1. Circuit Foundations
+## 1. Circuit Foundations: Theoretical Basis
 
+### Series Rule:
+
+If node A connects to node B, which connects to node C (and B has degree 2):
+
+$$
+R_{\text{eq}} = R_{AB} + R_{BC}
+$$
+
+### Parallel Rule:
+
+If multiple edges connect the same pair of nodes:
+
+$$
+\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots
+$$
+
+
+---
 ### Kirchhoff’s Voltage Law (KVL):
 
 $$
