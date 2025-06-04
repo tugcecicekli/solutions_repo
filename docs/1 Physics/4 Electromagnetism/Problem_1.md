@@ -63,7 +63,7 @@ We solve this system numerically using time-stepping.
 
 ---
 
-## Python Code (for Google Colab)
+## Code
 
 ```python
 import numpy as np
