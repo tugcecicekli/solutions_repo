@@ -153,6 +153,9 @@ print(f"Series Example → Equivalent Resistance: {req1:.2f} Ω")
 Visit:[Colab](https://colab.research.google.com/drive/1S-2XQLto7CzYvL6rtMLSLUcyY9CDzIwc#scrollTo=eCMQmkc6Av15
 )
 
+1[Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/5%20Circuits/Unknown-52.png?raw=true)
+
+
 ```python
 # Parallel Only: START — 10Ω — END, START — 20Ω — END
 G2 = nx.MultiGraph()
