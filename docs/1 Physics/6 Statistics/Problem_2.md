@@ -217,6 +217,8 @@ def simulate_buffon_needle(N=10000, L=1.0, d=2.0):
 
 simulate_buffon_needle()
 ```
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/6%20Statistics/Unknown-626.png?raw=true)
+
 Visit: [Colab](https://colab.research.google.com/drive/12BYlXtYpTRca7vZ0PzWge0qjHnQXr0b5#scrollTo=Dc_8nvQYHBdE)
 
 ---
