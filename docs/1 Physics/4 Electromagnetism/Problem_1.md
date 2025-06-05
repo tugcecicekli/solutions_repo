@@ -331,6 +331,7 @@ ax3.set_zlabel("Z")
 plt.tight_layout()
 plt.show()
 ```
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/4%20Electromagnetism/Unknown-39.png?raw=true)
 
 ## Insights
 
