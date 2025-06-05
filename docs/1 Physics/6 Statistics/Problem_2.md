@@ -338,3 +338,5 @@ Visit: [Colab](https://colab.research.google.com/drive/12BYlXtYpTRca7vZ0PzWge0qj
 * **Circle-based method** uses 2D geometry and is fast and simple.
 * **Buffon’s Needle** is elegant and connects probability to geometry but converges more slowly.
 * Both methods illustrate how randomness and computation can estimate mathematical constants.
+
+  ![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/6%20Statistics/Unknown.gif?raw=true)
