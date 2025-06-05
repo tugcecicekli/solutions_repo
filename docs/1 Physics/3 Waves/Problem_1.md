@@ -1,5 +1,4 @@
 # Problem 1
-# Problem 1
 
 # Interference Patterns on a Water Surface
 
