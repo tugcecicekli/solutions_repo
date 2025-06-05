@@ -178,6 +178,8 @@ HTML(ani.to_jshtml())
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-#scrollTo=RE23Izc_flOo)
 
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/3%20Waves/Unknown-4.gif?raw=true)
+
 ---
 
 ## 3D Visualization
