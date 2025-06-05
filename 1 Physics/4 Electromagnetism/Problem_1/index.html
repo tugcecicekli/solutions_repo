@@ -403,6 +403,65 @@ HTML(ani.to_jshtml())  # For Colab inline display
 </code></pre>
 <p>Visit: <a href="https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-#scrollTo=f-tm-PLyyMPQ">Colab</a></p>
 <hr/>
+<pre><code class="language-python"># Constants
+q = 1.0       # charge (Coulombs)
+m = 1.0       # mass (kg)
+B = np.array([0, 0, 1.0])  # Magnetic field along z
+dt = 0.01
+steps = 1000
+
+def simulate_motion(v0, r0, E=np.array([0.0, 0.0, 0.0]), damping=0.0):
+    r = np.zeros((steps, 3))
+    v = v0.copy()
+    r[0] = r0.copy()
+
+    for i in range(1, steps):
+        F = q * (np.cross(v, B) + E)
+        a = F / m
+        v += a * dt
+        v *= (1.0 - damping)
+        r[i] = r[i - 1] + v * dt
+    return r
+
+# 1. Circular trajectory: v ⊥ B, no E field
+r_circular = simulate_motion(np.array([1.0, 0.0, 0.0]), np.array([0.0, 1.0, 0.0]))
+
+# 2. E x B drift: add electric field in x direction, v in y
+r_drift = simulate_motion(np.array([0.0, 1.0, 0.0]), np.array([0.0, 0.0, 0.0]), E=np.array([1.0, 0.0, 0.0]))
+
+# 3. Spiral motion: add z-component to velocity and weak damping
+r_spiral = simulate_motion(np.array([1.0, 0.0, 0.5]), np.array([0.0, 1.0, 0.0]), damping=0.001)
+
+# Plotting
+fig = plt.figure(figsize=(12, 9))
+
+# Plot 1: Circular
+ax1 = fig.add_subplot(311, projection='3d')
+ax1.plot(r_circular[:, 0], r_circular[:, 1], r_circular[:, 2], color='blue')
+ax1.set_title("Circular Trajectory in Magnetic Field")
+ax1.set_xlabel("X")
+ax1.set_ylabel("Y")
+ax1.set_zlabel("Z")
+
+# Plot 2: E x B drift
+ax2 = fig.add_subplot(312, projection='3d')
+ax2.plot(r_drift[:, 0], r_drift[:, 1], r_drift[:, 2], color='blue')
+ax2.set_title("E × B Drift of Charged Particle")
+ax2.set_xlabel("X")
+ax2.set_ylabel("Y")
+ax2.set_zlabel("Z")
+
+# Plot 3: Spiral
+ax3 = fig.add_subplot(313, projection='3d')
+ax3.plot(r_spiral[:, 0], r_spiral[:, 1], r_spiral[:, 2], color='blue')
+ax3.set_title("Stable Spiral Trajectory in Magnetic Field")
+ax3.set_xlabel("X")
+ax3.set_ylabel("Y")
+ax3.set_zlabel("Z")
+
+plt.tight_layout()
+plt.show()
+</code></pre>
 <h2 id="insights">Insights</h2>
 <ul>
 <li>The Lorentz force is always perpendicular to velocity ⇒ no work done ⇒ speed constant.</li>
