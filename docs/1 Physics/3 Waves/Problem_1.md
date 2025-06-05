@@ -35,20 +35,7 @@ $$
 
 ---
 
-## Setup
-
-### Install and Import
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import animation
-from IPython.display import HTML
-```
-
----
-
-## 1. Single Source Simulation (Static + Animation)
+## 1. Single Source Simulation 
 
 ```python
 # Parameters
@@ -190,7 +177,7 @@ Visit: [Colab](https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjU
 
 ---
 
-## Optional: 3D Visualization
+## 3D Visualization
 
 ```python
 from mpl_toolkits.mplot3d import Axes3D
