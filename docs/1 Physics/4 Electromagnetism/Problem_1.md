@@ -94,7 +94,6 @@ def simulate_trajectory(v0, r0, damping=0.0):
 
     return r
 ```
-Visit: [Colab](https://colab.research.google.com/drive/1_moLRazWlQaZPgkIXS1iNou0NHHlH8U-#scrollTo=f-tm-PLyyMPQ)
 
 ---
 
