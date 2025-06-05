@@ -44,62 +44,20 @@ $$
 ## **3. Simulation Code**
 
 ```python
-# Import necessary libraries
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
-
-# Gravitational constant and Earth parameters
-G = 6.67430e-11  # m^3 kg^-1 s^-2
-M = 5.972e24     # kg
-R_earth = 6371e3 # m
-
-# Define the equations of motion
-def equations(t, y):
-    r, vr, theta, vtheta = y
-    ar = -G * M / r**2 + r * vtheta**2
-    atheta = -2 * vr * vtheta / r
-    return [vr, ar, vtheta, atheta]
-
-# Initial conditions
-altitude = 800e3  # 800 km above Earth's surface
-initial_velocities = [5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000]
-
-# Time span for simulation
-t_span = (0, 10000)
-
-# Plot the Earth as a circle
 plt.figure(figsize=(8, 8))
-earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.3, label='Earth')
-plt.gca().add_artist(earth)
-
-# Loop over different initial velocities
-for vtheta0 in initial_velocities:
-    # Initial conditions for each velocity
-    y0 = [R_earth + altitude, 0, 0, vtheta0]
-    
-    # Solve the equations
-    solution = solve_ivp(equations, t_span, y0, method='RK45', max_step=1)
-    
-    # Convert polar to Cartesian coordinates
-    x = solution.y[0] * np.cos(solution.y[2])
-    y = solution.y[0] * np.sin(solution.y[2])
-    
-    # Plot the trajectory
-    plt.plot(x, y, label=f'v = {vtheta0 / 1000:.1f} km/s')
-
-# Final plot adjustments
+plt.plot(trajectory[:, 0], trajectory[:, 1], label="Payload Trajectory")
+earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.5, label='Earth')
+plt.gca().add_patch(earth)
+plt.gca().set_aspect('equal')
 plt.xlabel('x (m)')
 plt.ylabel('y (m)')
-plt.title('Trajectories of Payload Near Earth')
+plt.title('Trajectory of Released Payload Near Earth')
 plt.legend()
-plt.axis('equal')
 plt.grid(True)
 plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1tmNx00N0d6ZO2M9a7sIeov0q_ArNJI7H#scrollTo=D2oE4rHnG28i)
 
-![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-17.png?raw=true)
 
 ---
 
@@ -107,100 +65,63 @@ Visit: [Colab](https://colab.research.google.com/drive/1tmNx00N0d6ZO2M9a7sIeov0q
 ## **4. Animation Code**
 
 ```python
-import matplotlib.animation as animation
-from IPython.display import HTML
-
 fig, ax = plt.subplots(figsize=(8, 8))
-ax.set_xlim(-2e7, 2e7)
-ax.set_ylim(-2e7, 2e7)
-earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.3)
-ax.add_artist(earth)
-line, = ax.plot([], [], 'r-', label='Trajectory')
+ax.set_xlim(-2*R_earth, 2*R_earth)
+ax.set_ylim(-2*R_earth, 2*R_earth)
+ax.set_aspect('equal')
+ax.set_title("Payload Trajectory Animation")
+
+earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.5)
+payload, = ax.plot([], [], 'ro', markersize=4)
+path, = ax.plot([], [], 'r-', linewidth=1)
+
+ax.add_patch(earth)
 
 def init():
-    line.set_data([], [])
-    return line,
+    payload.set_data([], [])
+    path.set_data([], [])
+    return payload, path
 
 def update(frame):
-    vtheta0 = initial_velocities[frame % len(initial_velocities)]
-    y0 = [R_earth + altitude, 0, 0, vtheta0]
-    solution = solve_ivp(equations, t_span, y0, method='RK45', max_step=1)
-    x = solution.y[0] * np.cos(solution.y[2])
-    y = solution.y[0] * np.sin(solution.y[2])
-    line.set_data(x, y)
-    ax.set_title(f'Payload Trajectory (v = {vtheta0 / 1000:.1f} km/s)')
-    return line,
+    payload.set_data([trajectory[frame, 0]], [trajectory[frame, 1]]) # Fix: Pass sequences
+    path.set_data(trajectory[:frame+1, 0], trajectory[:frame+1, 1])
+    return payload, path
 
-ani = animation.FuncAnimation(fig, update, frames=len(initial_velocities), init_func=init, repeat=True, blit=True)
-plt.legend()
-plt.close()
+ani = FuncAnimation(fig, update, frames=len(trajectory), init_func=init,
+                    blit=True, interval=30)
+
 HTML(ani.to_jshtml())
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1tmNx00N0d6ZO2M9a7sIeov0q_ArNJI7H#scrollTo=D2oE4rHnG28i)
 
 ```python
-# Import necessary libraries
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
+fig, ax = plt.subplots(figsize=(10, 10))
 
-# Gravitational constant and Earth parameters
-G = 6.67430e-11  # m^3 kg^-1 s^-2
-M = 5.972e24     # kg
-R_earth = 6371e3 # m
+# Earth
+earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.4, label='Earth')
+ax.add_patch(earth)
 
-# Differential equations for the motion
-def equations(t, y):
-    r, vr, theta, vtheta = y
-    ar = -G * M / r**2 + r * vtheta**2
-    atheta = -2 * vr * vtheta / r
-    return [vr, ar, vtheta, atheta]
+# Trajectories
+for (v_kms, traj), color in zip(trajectories, colors):
+    if traj.shape[0] > 0:
+        ax.plot(traj[:, 0], traj[:, 1], color=color, label=f"{v_kms:.1f} km/s")
 
-# Initial conditions
-altitude = 800e3  # 800 km above Earth's surface
-initial_position = R_earth + altitude
-initial_velocities = np.arange(5000, 13001, 500)  # Velocities from 5 km/s to 13 km/s
+# Initial position marker
+ax.plot(r0[0], r0[1], 'ro', label="Launch Point")
 
-# Time span for simulation
-t_span = (0, 20000)  # Extended time for larger trajectories
-
-# Plot setup
-plt.figure(figsize=(8, 8))
-
-# Plot the Earth as a filled circle
-earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.5, label='Earth')
-plt.gca().add_artist(earth)
-
-# Plot the Earth's center
-plt.plot(0, 0, 'ko', label='Center of Earth')
-
-# Generate trajectories for each initial velocity
-for i, vtheta0 in enumerate(initial_velocities):
-    # Initial conditions for each velocity
-    y0 = [initial_position, 0, np.pi/2, vtheta0]
-
-    # Solve the differential equations
-    solution = solve_ivp(equations, t_span, y0, method='RK45', max_step=10)
-
-    # Convert polar coordinates to Cartesian for plotting
-    x = solution.y[0] * np.cos(solution.y[2])
-    y = solution.y[0] * np.sin(solution.y[2])
-
-    # Plot the trajectory
-    plt.plot(x, y, label=f'Trajectory {i+1} (v={vtheta0/1000:.1f} km/s)')
-
-# Plot customization
-plt.xlabel('x (m)')
-plt.ylabel('y (m)')
-plt.title('Trajectories in a Gravitational Field with Fixed Earth')
-plt.legend(loc='upper left', fontsize=8)
-plt.grid(True)
-plt.axis('equal')
+# Formatting
+ax.set_title("Trajectories from 800 km Altitude for Various Velocities")
+ax.set_xlabel("x (m)")
+ax.set_ylabel("y (m)")
+ax.set_aspect('equal')
+ax.set_xlim(-2*R_earth, 2*R_earth)
+ax.set_ylim(-2*R_earth, 2*R_earth)
+ax.grid(True)
+ax.legend(loc='upper right')
 plt.show()
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1tmNx00N0d6ZO2M9a7sIeov0q_ArNJI7H#scrollTo=D2oE4rHnG28i)
 
-![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/Unknown-16.png?raw=true)
 
 ---
 
