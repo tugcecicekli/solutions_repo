@@ -114,6 +114,8 @@ plt.ylabel("Period (s)")
 plt.grid(True)
 plt.show()
 ```
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/7%20Measurements/Unknown-72.png?raw=true)
+
 Visit: [Colab](https://colab.research.google.com/drive/1OTRbTTaFb3A38Wvb5JEP1-nqszRAT3YV#scrollTo=UGd9jv-Xk9O_)
 
 ---
