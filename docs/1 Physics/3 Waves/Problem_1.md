@@ -87,6 +87,8 @@ ani = animation.FuncAnimation(fig, animate, frames=np.linspace(0, 2, 60), interv
 HTML(ani.to_jshtml())
 ```
 Visit: [Colab](https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-#scrollTo=RE23Izc_flOo)
+
+![Example Image](https://github.com/tugcecicekli/solutions_repo/blob/main/docs/1%20Physics/3%20Waves/Unknown-2.gif?raw=true)
 ---
 
 ## 2. Two Sources Interference
