@@ -196,15 +196,7 @@ z(x, y, t) = A \cdot \sin(kr - \omega t + \phi)
 Z(x, y, t) = \sum_{i=1}^{N} A \cdot \sin(k r_i - \omega t + \phi_i)
 \]</div>
 <hr/>
-<h2 id="setup">Setup</h2>
-<h3 id="install-and-import">Install and Import</h3>
-<pre><code class="language-python">import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import animation
-from IPython.display import HTML
-</code></pre>
-<hr/>
-<h2 id="1-single-source-simulation-static-animation">1. Single Source Simulation (Static + Animation)</h2>
+<h2 id="1-single-source-simulation">1. Single Source Simulation</h2>
 <pre><code class="language-python"># Parameters
 A = 1.0         # amplitude
 λ = 2.0         # wavelength
@@ -321,7 +313,7 @@ HTML(ani.to_jshtml())
 </code></pre>
 <p>Visit: <a href="https://colab.research.google.com/drive/1oZVOuy4Nx-Na9ILn-ozYxNjUFb3O9TK-#scrollTo=RE23Izc_flOo">Colab</a></p>
 <hr/>
-<h2 id="optional-3d-visualization">Optional: 3D Visualization</h2>
+<h2 id="3d-visualization">3D Visualization</h2>
 <pre><code class="language-python">from mpl_toolkits.mplot3d import Axes3D
 
 fig = plt.figure(figsize=(10, 6))
