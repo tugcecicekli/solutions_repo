@@ -53,53 +53,6 @@ We solve this system numerically using time-stepping.
 
 ---
 
-## Simulation Setup
-
-**Assumptions:**
-
-* Charge $q = 1 \, \text{C}$
-* Mass $m = 1 \, \text{g} = 0.001 \, \text{kg}$
-* $\vec{B} = (0, 0, 1) \, \text{T}$ (magnetic field along z-axis)
-
----
-
-## Code
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-
-# Constants
-q = 1     # Charge (C)
-m = 0.001 # Mass (kg)
-dt = 0.001
-steps = 500
-
-# Magnetic Field
-B = np.array([0, 0, 1])
-
-# Initial Conditions
-def simulate_trajectory(v0, r0, damping=0.0):
-    r = np.zeros((steps, 3))
-    v = v0.copy()
-    r[0] = r0.copy()
-
-    for i in range(1, steps):
-        F = q * np.cross(v, B)
-        a = F / m
-        v += a * dt
-        v *= (1 - damping)  # simple damping
-        r[i] = r[i-1] + v * dt
-
-    return r
-```
-
----
-
-## Visualizing Trajectories
-
----
 
 ## Animation Code (Spiral Case)
 
